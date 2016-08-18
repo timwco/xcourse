@@ -1,0 +1,34 @@
+<div class="admin-view label label-default" ng-show="vm.authed">Administrator</div>
+
+<row>
+    <column cols="5" class="course-description">
+      <h2>{{ vm.title | capname }} Crash Course</h2>
+      <i>{{ vm.date }}</i>
+      <div class="text" ng-bind-html="vm.description"></div>
+    </column>
+
+    <column cols="7" class="chat-window">
+      <div class="inner">
+        <h4>Chat Window</h4>
+
+        <ul>
+          <li ng-repeat="message in vm.messages">
+            <span ng-bind-html="message.$value | linkify"></span>
+            <a href="" ng-click="vm.deleteMessage(message)" ng-show="vm.authed" class="delete badge badge-error" outline>X</a>
+          </li>
+        </ul>
+
+        <form ng-submit="vm.addMessage(vm.message)" class="forms" ng-show="vm.authed">
+          <section>
+            <input autocomplete="off" type="text" ng-model="vm.message" />
+          </section>
+        </form>
+      </div>
+    </column>
+</row>
+
+<row>
+  <div class="footer">
+    Brought to you by <a href="http://theironyard.com">The Iron Yard</a>
+  </div>
+</row>

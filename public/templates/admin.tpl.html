@@ -1,0 +1,22 @@
+<div class="admin-view label label-default" ng-show="vm.authed">Administrator</div>
+
+<div class="alert alert-error text-centered" ng-show="vm.alert">Sorry, we couldn't log you in. Make sure this is coming from an `@theironyard.com` email address.</div>
+
+<div class="text-centered" ng-hide="vm.authed">
+  <a href="/auth/google" class="btn google-login" big>Google Login</a>
+</div>
+
+<div class="adminContainer" ng-show="vm.authed">
+
+  <div class="tabContainer">
+		<ul class="tabsList">
+		  <li ng-repeat="tab in vm.tabs" 
+          ng-class="{active:vm.isActiveTab(tab.url)}" 
+          ng-click="vm.onClickTab(tab)">
+        <button small outline>{{ tab.title }}</button>
+      </li>
+		</ul>
+    <row class="tabContent" ng-include="vm.tabContent"></row>
+  </div>
+
+</div>

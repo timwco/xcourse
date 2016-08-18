@@ -1,0 +1,26 @@
+<div class="alert alert-error" ng-show="vm.showUnregister">You need to register first.</div>
+<div class="alert alert-error" ng-show="vm.noRoom">No Room Exists for that ID</div>
+<div class="alert alert-error" ng-show="vm.showRoomAccess">Sorry, You only have access to <a href="/#/room/{{ vm.roomAccessible }}">this room</a>.</div>
+
+
+<form class="forms form-container" ng-submit="vm.register(info, roomID)">
+  <row>
+    <column cols="12" class="dateField">
+      <h2>Registration</h2>
+      <p class="text-centered">Fill out the form below to view the lesson notes and to gain access to messages your instructor posts during the event.</p>
+      <label>Full Name <span class="req">*</span></label>
+      <input type="text" ng-model="info.name">
+      <br>
+      <label>Email Address<span class="req">*</span></label>
+      <input type="email" ng-model="info.email">
+      <br>
+      <label>Room ID <span class="req">*</span></label>
+      <input type="text" ng-model="roomID" class="width-2">
+    </colunm>
+  </row>
+  <row>
+    <column cols="12">
+      <button class="btn">View Room</button>
+    </colunm>
+  </row>
+</form>

@@ -1,0 +1,44 @@
+{
+  "name": "adonis-app",
+  "version": "3.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x \"node --harmony_proxies\" server.js",
+    "start": "node --harmony_proxies server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "adonis-ace": "^3.0.1",
+    "adonis-auth": "^1.0.0",
+    "adonis-commands": "^2.1.0",
+    "adonis-fold": "^3.0.2",
+    "adonis-framework": "^3.0.1",
+    "adonis-lucid": "^3.0.3",
+    "adonis-middleware": "^1.0.7",
+    "youch": "^1.0.1"
+  },
+  "autoload": {
+    "App": "./app"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1",
+    "babelify": "7.3.0",
+    "browserify": "13.1.0",
+    "gulp": "3.9.1",
+    "gulp-sass": "2.3.2",
+    "gulp-watch": "4.3.9",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.1.0",
+    "angular": "1.5.0",
+    "angular-cookies": "1.5.0",
+    "angular-ui-router": "0.2.18",
+    "angularfire": "1.1.3",
+    "autolinker": "0.23.0",
+    "babel-preset-es2015": "6.5.0",
+    "node-sass": "3.4.2",
+    "pikaday": "1.4.0"
+  }
+}
