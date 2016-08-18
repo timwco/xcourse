@@ -17,4 +17,26 @@
 
 const Route = use('Route')
 
+// Main Route - Loads AngularJS Main Page
 Route.on('/').render('main')
+
+// Auth Routes
+Route.group('auth', () => {
+  Route.get('/google', 'AuthController.google')
+  Route.get('/google/callback', 'AuthController.callback')
+  Route.get('/verify', 'AuthController.verify')
+}).prefix('/auth')
+
+
+// Room Routes
+Route.group('rooms', () => {
+  Route.get('/', 'RoomController.index')
+  Route.post('/', 'RoomController.store')
+  Route.get('/:id', 'RoomController.show')
+  Route.put('/:id', 'RouteController.update')
+  Route.get('/export/:id', 'RouteController.export')
+}).prefix('/room')
+
+
+// Guest Routes
+Route.post('/register', 'GuestController.store')
