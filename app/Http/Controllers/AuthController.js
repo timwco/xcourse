@@ -5,6 +5,10 @@ const passport = require('passport');
 class AuthController {
 
 
+  * verify (request, response) {
+    response.json({ authed: true })
+  }
+
   * google (request, response) {
     // Send info to Google
     passport.authenticate('google', { scope: ['profile', 'email'] })(request, response);
@@ -14,16 +18,15 @@ class AuthController {
     // Callback to be run if you can login via Google
     passport.authenticate('google', (err, user, info) => {
       // If any errors...
-      if (err) return res.redirect('/#/admin?c=1');
+      if (err) return response.redirect('/#/admin?c=1');
+
       request.logIn(user, function(err) {
-        if (err) return res.redirect('/#/admin?c=1');
+        if (err) return response.redirect('/#/admin?c=1');
       });
       // Successfully show user is logged in
-      return request.redirect('/#/admin');
+      return response.redirect('/#/admin');
     })(request, response);
   }
-
-
 
 }
 
