@@ -24,7 +24,7 @@ Route.on('/').render('main')
 Route.group('auth', () => {
   Route.get('/google', 'AuthController.google')
   Route.get('/google/callback', 'AuthController.callback')
-  Route.get('/verify', 'AuthController.verify')
+  Route.get('/verify', 'AuthController.verify').middleware('passport')
 }).prefix('/auth')
 
 
