@@ -1,6 +1,6 @@
 import Pikaday from 'pikaday';
 
-let AdminController = function(RoomService, AuthService, $stateParams, $state) {
+let AdminController = function(RoomService, AuthService, $stateParams, $state, $cookies, $location) {
 
   let vm = this;
 
@@ -26,27 +26,36 @@ let AdminController = function(RoomService, AuthService, $stateParams, $state) {
   // Verify User Logged in
   function activate() {
 
-    if ($stateParams.c === '1') { vm.alert = true;}
+    console.log($stateParams);
+
+    if ($stateParams.c === '1') { vm.alert = true; }
     if ($stateParams.c === '2') { vm.noData = true; }
 
-    AuthService.verify().then( (res) => {
-      vm.authed = res.data.authed;
-      if (vm.authed) {
-        new Pikaday({
-          field: document.getElementById('datepicker'),
-          format: 'MMM D, YYYY',
-          position: 'bottom left'
-        });
-      } else {
-        AuthService.genURL().then( res => {
-          vm.googleURL = res.data.url;
-        });
-      }
-    });
+    if ($stateParams.a) {
+      $cookies.put('token', $stateParams.a);
+      $location.search('a', null)
+    }
 
-    // Load Rooms
-    loadRooms();
+    let token = $cookies.get('token');
 
+    if (token) {
+      AuthService.verify(token).then( (res) => {
+        vm.authed = res.data.authed;
+        if (vm.authed) {
+          new Pikaday({
+            field: document.getElementById('datepicker'),
+            format: 'MMM D, YYYY',
+            position: 'bottom left'
+          });
+          // Load Rooms
+          loadRooms();
+        }
+      });
+    } else {
+      AuthService.genURL().then( res => {
+        vm.googleURL = res.data.url;
+      });
+    }
   }
 
   function onClickTab (tab) {
@@ -76,5 +85,5 @@ let AdminController = function(RoomService, AuthService, $stateParams, $state) {
 
 };
 
-AdminController.$inject = ['RoomService', 'AuthService', '$stateParams', '$state'];
+AdminController.$inject = ['RoomService', 'AuthService', '$stateParams', '$state', '$cookies', '$location'];
 export default AdminController;

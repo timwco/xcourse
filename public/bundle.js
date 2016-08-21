@@ -46440,7 +46440,7 @@ var _pikaday2 = _interopRequireDefault(_pikaday);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AdminController = function AdminController(RoomService, AuthService, $stateParams, $state) {
+var AdminController = function AdminController(RoomService, AuthService, $stateParams, $state, $cookies, $location) {
 
   var vm = this;
 
@@ -46463,6 +46463,8 @@ var AdminController = function AdminController(RoomService, AuthService, $stateP
   // Verify User Logged in
   function activate() {
 
+    console.log($stateParams);
+
     if ($stateParams.c === '1') {
       vm.alert = true;
     }
@@ -46470,23 +46472,31 @@ var AdminController = function AdminController(RoomService, AuthService, $stateP
       vm.noData = true;
     }
 
-    AuthService.verify().then(function (res) {
-      vm.authed = res.data.authed;
-      if (vm.authed) {
-        new _pikaday2.default({
-          field: document.getElementById('datepicker'),
-          format: 'MMM D, YYYY',
-          position: 'bottom left'
-        });
-      } else {
-        AuthService.genURL().then(function (res) {
-          vm.googleURL = res.data.url;
-        });
-      }
-    });
+    if ($stateParams.a) {
+      $cookies.put('token', $stateParams.a);
+      $location.search('a', null);
+    }
 
-    // Load Rooms
-    loadRooms();
+    var token = $cookies.get('token');
+
+    if (token) {
+      AuthService.verify(token).then(function (res) {
+        vm.authed = res.data.authed;
+        if (vm.authed) {
+          new _pikaday2.default({
+            field: document.getElementById('datepicker'),
+            format: 'MMM D, YYYY',
+            position: 'bottom left'
+          });
+          // Load Rooms
+          loadRooms();
+        }
+      });
+    } else {
+      AuthService.genURL().then(function (res) {
+        vm.googleURL = res.data.url;
+      });
+    }
   }
 
   function onClickTab(tab) {
@@ -46514,7 +46524,7 @@ var AdminController = function AdminController(RoomService, AuthService, $stateP
   }
 };
 
-AdminController.$inject = ['RoomService', 'AuthService', '$stateParams', '$state'];
+AdminController.$inject = ['RoomService', 'AuthService', '$stateParams', '$state', '$cookies', '$location'];
 exports.default = AdminController;
 
 },{"pikaday":10}],12:[function(require,module,exports){
@@ -46749,10 +46759,11 @@ _angular2.default.module('app.core', []).controller('RoomController', _room2.def
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var AuthService = function AuthService($http) {
+var AuthService = function AuthService($http, $cookies) {
 
-  this.verify = function () {
-    return $http.get('/auth/verify');
+  this.verify = function (token) {
+    var config = { headers: { Authorization: 'Bearer ' + token } };
+    return $http.get('/auth/verify', config);
   };
 
   this.genURL = function () {
@@ -46760,7 +46771,7 @@ var AuthService = function AuthService($http) {
   };
 };
 
-AuthService.$inject = ['$http'];
+AuthService.$inject = ['$http', '$cookies'];
 exports.default = AuthService;
 
 },{}],18:[function(require,module,exports){
@@ -46807,10 +46818,15 @@ exports.default = FireChat;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var RoomService = function RoomService($http) {
+var RoomService = function RoomService($http, $cookies) {
+  var _this = this;
+
+  this.config = function () {
+    return { headers: { Authorization: 'Bearer ' + $cookies.get('token') } };
+  };
 
   this.create = function (data) {
-    return $http.post('/room', data);
+    return $http.post('/room', data, _this.config());
   };
 
   this.get = function (id) {
@@ -46818,15 +46834,15 @@ var RoomService = function RoomService($http) {
   };
 
   this.getRooms = function () {
-    return $http.get('/room');
+    return $http.get('/room', _this.config());
   };
 
   this.destroy = function (id) {
-    return $http.put('room/' + id);
+    return $http.put('room/' + id, _this.config());
   };
 };
 
-RoomService.$inject = ['$http'];
+RoomService.$inject = ['$http', '$cookies'];
 exports.default = RoomService;
 
 },{}],20:[function(require,module,exports){
@@ -46844,9 +46860,15 @@ var config = function config($stateProvider, $urlRouterProvider) {
 
   // Admin
   .state('root.admin', {
-    url: '/admin?c',
+    url: '/admin?c&a',
     controller: 'AdminController as vm',
     templateUrl: 'templates/admin.tpl.html'
+  }).state('root.logout', {
+    url: '/logout',
+    controller: function controller($cookies, $state) {
+      $cookies.remove('token');
+      $state.go('root.admin');
+    }
   })
 
   // Admins

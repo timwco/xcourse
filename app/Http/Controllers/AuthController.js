@@ -6,7 +6,7 @@ class AuthController {
 
 
   * verify (request, response) {
-    response.json({ authed: false })
+    response.json({ authed: true })
   }
 
   * url (request, response) {
@@ -23,13 +23,15 @@ class AuthController {
       // Check for existing User
       let user = yield User.findBy('googleId', profile.id)
 
-      if (user) {
-        response.redirect('/#/admin');
-      } else {
-        // No existing user, create one in the DB
-        yield this.createUser(profile);
-        response.redirect('/#/admin');
+      // No existing user, create one in the DB
+      if (!user) {
+        user = yield this.createUser(profile);
       }
+
+      let token = yield request.auth.generate(user);
+
+      // Dirty... super dirty
+      response.redirect('/#/admin?a=' + token);
 
     } else { response.redirect('/#/admin?c=1') }
   }

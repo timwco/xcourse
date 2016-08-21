@@ -1,7 +1,8 @@
-let AuthService = function($http) {
+let AuthService = function($http, $cookies) {
 
-  this.verify = () => {
-    return $http.get('/auth/verify');
+  this.verify = (token) => {
+    const config = { headers: { Authorization: 'Bearer ' + token } }
+    return $http.get('/auth/verify', config);
   }
 
   this.genURL = () => {
@@ -10,5 +11,5 @@ let AuthService = function($http) {
 
 };
 
-AuthService.$inject = ['$http'];
+AuthService.$inject = ['$http', '$cookies'];
 export default AuthService;

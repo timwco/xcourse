@@ -22,7 +22,7 @@ Route.on('/').render('main')
 
 // Auth Routes
 Route.group('auth', () => {
-  Route.get('/verify', 'AuthController.verify')
+  Route.get('/verify', 'AuthController.verify').middleware('auth')
   Route.get('/url', 'AuthController.url').middleware('googleURL')
   Route.get('/google/callback', 'AuthController.callback').middleware('googleLogin')
 }).prefix('/auth')
@@ -30,11 +30,11 @@ Route.group('auth', () => {
 
 // Room Routes
 Route.group('rooms', () => {
-  Route.get('/', 'RoomController.index')
-  Route.post('/', 'RoomController.store')
+  Route.get('/', 'RoomController.index').middleware('auth')
+  Route.post('/', 'RoomController.store').middleware('auth')
   Route.get('/:id', 'RoomController.show')
-  Route.put('/:id', 'RouteController.update')
-  Route.get('/export/:id', 'RouteController.export')
+  Route.put('/:id', 'RouteController.update').middleware('auth')
+  Route.get('/export/:id', 'RouteController.export').middleware('auth')
 }).prefix('/room')
 
 

@@ -298,3 +298,6 @@ div.label.label-default.admin-view {
       background-color: #233139; }
       .tabsList li.active button {
         color: white; }
+
+.align-right {
+  float: right; }

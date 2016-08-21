@@ -8,9 +8,17 @@ let config = function($stateProvider, $urlRouterProvider) {
 
     // Admin
     .state('root.admin', {
-      url: '/admin?c',
+      url: '/admin?c&a',
       controller: 'AdminController as vm',
       templateUrl: 'templates/admin.tpl.html'
+    })
+
+    .state('root.logout', {
+      url: '/logout',
+      controller: function ($cookies, $state) {
+        $cookies.remove('token');
+        $state.go('root.admin');
+      }
     })
 
     // Admins
