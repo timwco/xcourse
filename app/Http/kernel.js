@@ -16,8 +16,7 @@ const globalMiddleware = [
   'Adonis/Middleware/BodyParser',
   'Adonis/Middleware/Shield',
   'Adonis/Middleware/Flash',
-  'Adonis/Middleware/AuthInit',
-  'App/Http/Middleware/GoogleAuthUrl'
+  'Adonis/Middleware/AuthInit'
 ]
 
 /*
@@ -31,7 +30,8 @@ const globalMiddleware = [
 */
 const namedMiddleware = {
   auth: 'Adonis/Middleware/Auth',
-  googleURL: 'App/Http/Middleware/GoogleAuthUrl'
+  googleURL: 'App/Http/Middleware/GoogleAuthUrl',
+  googleLogin: 'App/Http/Middleware/GoogleAuthLogin'
 }
 
 /*
