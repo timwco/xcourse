@@ -37,7 +37,7 @@ class GoogleAuthLogin {
     const googlePlus = thunkify(plus.people.get)
     const profile = yield googlePlus({ userId: 'me', auth: oauth2Client })
     
-    request.google_profile = profile[0]
+    request.googleProfile = profile[0]
 
     yield next;
 

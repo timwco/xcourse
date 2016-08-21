@@ -1,5 +1,7 @@
 'use strict'
 
+const User = use('App/Model/User')
+
 class AuthController {
 
 
@@ -13,14 +15,38 @@ class AuthController {
 
   * callback (request, response) {
 
-    console.log('CONTROLLER', request.google_profile);
-    
-    if (request.google_profile) {
-      response.redirect('/#/admin');
-    } else {
-      response.redirect('/#/admin?c=1');
+    const profile = request.googleProfile;
+
+    // Are they logged in & is it a TIY Email
+    if (profile && this.validateTIY(profile)) {
+
+      // Check for existing User
+      let user = yield User.findBy('googleId', profile.id)
+
+      if (user) {
+        response.redirect('/#/admin');
+      } else {
+        // No existing user, create one in the DB
+        yield this.createUser(profile);
+        response.redirect('/#/admin');
+      }
+
+    } else { response.redirect('/#/admin?c=1') }
+  }
+
+  validateTIY (profile) {
+    return profile.domain === 'theironyard.com';
+  }
+
+  createUser (profile) {
+    let user = {
+      name: profile.displayName,
+      email: profile.emails[0].value,
+      authProvider: 'Google',
+      googleId: profile.id
     }
 
+    return User.create(user);
   }
 
 }
