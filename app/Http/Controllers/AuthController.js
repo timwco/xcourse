@@ -12,7 +12,13 @@ class AuthController {
   }
 
   * callback (request, response) {
-    response.json({ stuff: 'yeah' })
+    
+    if (request.google_profile) {
+      response.redirect('/#/admin');
+    } else {
+      response.redirect('/#/admin?c=1');
+    }
+
   }
 
 }

@@ -24,23 +24,24 @@ class GoogleAuthLogin {
       config.callback
     );
 
+    // Get the code from the callback response
     const query = request.get();
 
-    oauth2Client.getToken(query.code, function(err, tokens) {
-      
+    // The callback to run once we have a token
+    let callback = (err, tokens) => {
       if(!err) {
         oauth2Client.setCredentials(tokens);
-        
         plus.people.get({ userId: 'me', auth: oauth2Client }, function (err, profile) {
           if (err) {
-            return console.log('An error occured', err);
+            return request.google_profile = err;
           }
-          console.log(profile);
+          return request.google_profile = profile;
         });
-
       }
+    }
 
-    });
+    // Connect to Google & get our token
+    oauth2Client.getToken(query.code, callback);
 
     yield next
   }
