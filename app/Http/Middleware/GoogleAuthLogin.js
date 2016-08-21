@@ -28,40 +28,19 @@ class GoogleAuthLogin {
     // Get the code from the callback response
     const query = request.get();
 
-    console.log('1 ------ ');
-
-    // The callback to run once we have a token
-    let callback = (err, tokens) => {
-      if(!err) {
-        console.log('2 ------ ');
-        oauth2Client.setCredentials(tokens);
-        plus.people.get({ userId: 'me', auth: oauth2Client }, function (err, profile) {
-          if (err) {
-            return request.google_profile = err;
-          }
-          console.log('MIDDLE', profile);
-          return request.google_profile = profile;
-        });
-      }
-    }
-
     // Connect to Google & get our token
-    // oauth2Client.getToken(query.code, callback);
+    const oauthToken = thunkify(oauth2Client.getToken.bind(oauth2Client))
+    const tokens = yield oauthToken(query.code)
+    oauth2Client.setCredentials(tokens[0]);
 
+    // Connect to Google to get user info
+    const googlePlus = thunkify(plus.people.get)
+    const profile = yield googlePlus({ userId: 'me', auth: oauth2Client })
+    
+    request.google_profile = profile[0]
 
-    const oac = thunkify(oauth2Client.getToken);
+    yield next;
 
-    // try {
-
-      const x = yield oac(query.code);
-      console.log('X', x);
-
-    // } catch (e) {
-    //   console.log('THUNK', e);
-    // }
-
-
-    yield next
   }
 
 }

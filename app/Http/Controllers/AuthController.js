@@ -13,7 +13,7 @@ class AuthController {
 
   * callback (request, response) {
 
-    console.log(request.google_profile);
+    console.log('CONTROLLER', request.google_profile);
     
     if (request.google_profile) {
       response.redirect('/#/admin');
