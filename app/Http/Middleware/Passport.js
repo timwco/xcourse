@@ -3,10 +3,9 @@
 const Env = use('Env')
 const User = use('App/Model/User')
 
-const passport = require('passport')
-const GoogleStrategy = require('passport-google-oauth20').Strategy
-const bcrypt = require('bcrypt')
-const config = {};
+const google = require('googleapis')
+const OAuth2 = google.auth.OAuth2
+const config = {}
 
 if (Env.get('NODE_ENV') === 'development') {
   config.callback = 'http://localhost:3333/auth/google/callback';
@@ -14,34 +13,27 @@ if (Env.get('NODE_ENV') === 'development') {
   config.callback = 'https://xcourse.co/auth/google/callback';
 }
 
-
 class Passport {
 
   * handle (request, response, next) {
 
-    console.log('HERE ---------------------------- 1');
+    const oauth2Client = new OAuth2(
+      Env.get('GOOGLE_CLIENT_ID'), 
+      Env.get('GOOGLE_SECRET'), 
+      config.callback
+    );
 
-    passport.use(new GoogleStrategy({
-        clientID: Env.get('GOOGLE_CLIENT_ID'),
-        clientSecret: Env.get('GOOGLE_CLIENT_SECRET'),
-        callbackURL: config.callback
-      },
-      yield (accessToken, refreshToken, profile, done) => {
-        console.log('HERE ---------------------------- 2');
+    const scopes = [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email'
+    ];
 
-        const user = new User();
-          user.name = profile.displayName
-          user.email = profile.emails[0].value
-          user.authProvider = 'Google'
-          user.googleId = profile.id
+    const url = yield oauth2Client.generateAuthUrl({
+      access_type: 'online', // 'online' (default) or 'offline' (gets refresh_token)
+      scope: scopes // If you only need one scope you can pass it as string
+    });
 
-        user.save();
-
-        return done(err, user);
-      }
-    ));
-
-    console.log('HERE ---------------------------- 3');
+    console.log(url);
 
     yield next
   }

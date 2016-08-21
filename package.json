@@ -19,9 +19,11 @@
     "adonis-lucid": "^3.0.3",
     "adonis-middleware": "^1.0.7",
     "bcrypt": "0.8.7",
+    "googleapis": "12.3.0",
     "moment": "2.14.1",
     "passport": "0.3.2",
     "passport-google-oauth20": "1.0.0",
+    "thunkify": "2.1.2",
     "youch": "^1.0.1"
   },
   "autoload": {
