@@ -1,5 +1,7 @@
 'use strict'
 
+const Guest = use('App/Model/Guest')
+
 const moment = require('moment');
 
 class GuestController {

@@ -46547,12 +46547,16 @@ var RoomController = function RoomController(AuthService, RoomService, FireChat,
 
   function activate() {
 
-    AuthService.verify().then(function (res) {
-      vm.authed = res.data.authed;
-      if (!vm.authed) {
-        checkRegistration($stateParams.id);
-      }
-    });
+    var token = $cookies.get('token');
+
+    if (token) {
+      AuthService.verify().then(function (res) {
+        vm.authed = res.data.authed;
+        if (!vm.authed) {
+          checkRegistration($stateParams.id);
+        }
+      });
+    }
 
     RoomService.get($stateParams.id).then(function (res) {
 
