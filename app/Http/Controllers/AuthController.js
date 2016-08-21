@@ -9,6 +9,10 @@ class AuthController {
     response.json({ authed: true })
   }
 
+  * url (request, response) {
+    response.json({ url: request.googleURL })
+  }
+
   * google (request, response) {
     // Send info to Google
     passport.authenticate('google', { scope: ['profile', 'email'] })(request, response);
