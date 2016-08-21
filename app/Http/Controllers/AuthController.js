@@ -20,14 +20,7 @@ class AuthController {
     // Are they logged in & is it a TIY Email
     if (profile && this.validateTIY(profile)) {
 
-      // Check for existing User
-      let user = yield User.findBy('googleId', profile.id)
-
-      // No existing user, create one in the DB
-      if (!user) {
-        user = yield this.createUser(profile);
-      }
-
+      let user = yield this.createUser(profile);
       let token = yield request.auth.generate(user);
 
       // Dirty... super dirty
@@ -48,7 +41,7 @@ class AuthController {
       googleId: profile.id
     }
 
-    return User.create(user);
+    return User.findOrCreate({ 'googleId': profile.id }, user);
   }
 
 }
