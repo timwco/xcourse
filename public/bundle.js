@@ -46478,6 +46478,10 @@ var AdminController = function AdminController(RoomService, AuthService, $stateP
           format: 'MMM D, YYYY',
           position: 'bottom left'
         });
+      } else {
+        AuthService.genURL().then(function (res) {
+          vm.googleURL = res.data.url;
+        });
       }
     });
 
@@ -46749,6 +46753,10 @@ var AuthService = function AuthService($http) {
 
   this.verify = function () {
     return $http.get('/auth/verify');
+  };
+
+  this.genURL = function () {
+    return $http.get('/auth/url');
   };
 };
 

@@ -37,6 +37,10 @@ let AdminController = function(RoomService, AuthService, $stateParams, $state) {
           format: 'MMM D, YYYY',
           position: 'bottom left'
         });
+      } else {
+        AuthService.genURL().then( res => {
+          vm.googleURL = res.data.url;
+        });
       }
     });
 

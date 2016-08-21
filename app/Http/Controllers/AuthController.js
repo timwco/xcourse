@@ -4,7 +4,7 @@ class AuthController {
 
 
   * verify (request, response) {
-    response.json({ authed: true })
+    response.json({ authed: false })
   }
 
   * url (request, response) {
@@ -12,6 +12,8 @@ class AuthController {
   }
 
   * callback (request, response) {
+
+    console.log(request.google_profile);
     
     if (request.google_profile) {
       response.redirect('/#/admin');

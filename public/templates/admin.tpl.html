@@ -3,7 +3,7 @@
 <div class="alert alert-error text-centered" ng-show="vm.alert">Sorry, we couldn't log you in. Make sure this is coming from an `@theironyard.com` email address.</div>
 
 <div class="text-centered" ng-hide="vm.authed">
-  <a href="/auth/google" class="btn google-login" big>Google Login</a>
+  <a ng-href="{{ vm.googleURL }}" class="btn google-login" big>Google Login</a>
 </div>
 
 <div class="adminContainer" ng-show="vm.authed">

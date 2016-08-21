@@ -3,6 +3,7 @@
 const Env = use('Env')
 
 const google = require('googleapis')
+const thunkify = require('thunkify')
 const OAuth2 = google.auth.OAuth2
 const plus = google.plus('v1')
 const config = {}
@@ -27,21 +28,38 @@ class GoogleAuthLogin {
     // Get the code from the callback response
     const query = request.get();
 
+    console.log('1 ------ ');
+
     // The callback to run once we have a token
     let callback = (err, tokens) => {
       if(!err) {
+        console.log('2 ------ ');
         oauth2Client.setCredentials(tokens);
         plus.people.get({ userId: 'me', auth: oauth2Client }, function (err, profile) {
           if (err) {
             return request.google_profile = err;
           }
+          console.log('MIDDLE', profile);
           return request.google_profile = profile;
         });
       }
     }
 
     // Connect to Google & get our token
-    oauth2Client.getToken(query.code, callback);
+    // oauth2Client.getToken(query.code, callback);
+
+
+    const oac = thunkify(oauth2Client.getToken);
+
+    // try {
+
+      const x = yield oac(query.code);
+      console.log('X', x);
+
+    // } catch (e) {
+    //   console.log('THUNK', e);
+    // }
+
 
     yield next
   }

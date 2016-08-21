@@ -4,6 +4,10 @@ let AuthService = function($http) {
     return $http.get('/auth/verify');
   }
 
+  this.genURL = () => {
+    return $http.get('/auth/url');
+  }
+
 };
 
 AuthService.$inject = ['$http'];
