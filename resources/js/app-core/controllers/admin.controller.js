@@ -42,12 +42,6 @@ let AdminController = function(RoomService, AuthService, $stateParams, $state, $
       AuthService.verify(token).then( (res) => {
         vm.authed = res.data.authed;
         if (vm.authed) {
-          new Pikaday({
-            field: document.getElementById('datepicker'),
-            format: 'MMM D, YYYY',
-            position: 'bottom left'
-          });
-          // Load Rooms
           loadRooms();
         }
       });
@@ -60,6 +54,14 @@ let AdminController = function(RoomService, AuthService, $stateParams, $state, $
 
   function onClickTab (tab) {
     vm.tabContent = tab.url;
+    setTimeout( () => {
+      // Set Date Picker
+      new Pikaday({
+        field: document.getElementById('datepicker'),
+        format: 'MMM D, YYYY',
+        position: 'bottom left'
+      });
+    }, 100);
   } 
 
   function loadRooms () {

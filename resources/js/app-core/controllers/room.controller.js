@@ -15,7 +15,7 @@ let RoomController = function(AuthService, RoomService, FireChat, $stateParams, 
     let token = $cookies.get('token');
 
     if (token) {
-      AuthService.verify().then( (res) => {
+      AuthService.verify(token).then( (res) => {
         vm.authed = res.data.authed;
         if (!vm.authed) { checkRegistration($stateParams.id); }
       });

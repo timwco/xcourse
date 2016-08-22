@@ -46483,12 +46483,6 @@ var AdminController = function AdminController(RoomService, AuthService, $stateP
       AuthService.verify(token).then(function (res) {
         vm.authed = res.data.authed;
         if (vm.authed) {
-          new _pikaday2.default({
-            field: document.getElementById('datepicker'),
-            format: 'MMM D, YYYY',
-            position: 'bottom left'
-          });
-          // Load Rooms
           loadRooms();
         }
       });
@@ -46501,6 +46495,14 @@ var AdminController = function AdminController(RoomService, AuthService, $stateP
 
   function onClickTab(tab) {
     vm.tabContent = tab.url;
+    setTimeout(function () {
+      // Set Date Picker
+      new _pikaday2.default({
+        field: document.getElementById('datepicker'),
+        format: 'MMM D, YYYY',
+        position: 'bottom left'
+      });
+    }, 100);
   }
 
   function loadRooms() {
@@ -46550,7 +46552,7 @@ var RoomController = function RoomController(AuthService, RoomService, FireChat,
     var token = $cookies.get('token');
 
     if (token) {
-      AuthService.verify().then(function (res) {
+      AuthService.verify(token).then(function (res) {
         vm.authed = res.data.authed;
         if (!vm.authed) {
           checkRegistration($stateParams.id);
