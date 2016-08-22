@@ -1,12 +1,12 @@
 'use strict'
 
 const Room = use('App/Model/Room')
+const Guest = use('App/Model/Guest')
 const Database = use('Database')
 
 const MarkdownIt  = require('markdown-it')
 const md          = new MarkdownIt()
 const json2csv    = require('json2csv')
-const fs          = require('fs')
 
 class RoomController {
 
@@ -49,7 +49,20 @@ class RoomController {
   }
 
   * export (request, response) {
-    
+
+    const roomID = request.param('id');
+    const guests = yield Guest.query().where('roomID', roomID).fetch();
+
+    let fields = ['name', 'date', 'class', 'email'];
+    if (guests.value().length < 1) { return response.redirect('/#/admin?c=2') }
+    let allGuests = guests.value().map( guest => guest.attributes)
+
+    json2csv({ data: allGuests, fields: fields }, function (err, csv) {
+      if (err) console.log(err);
+      response.header('Content-disposition', 'attachment; filename='+ `room-${roomID}-export.csv`);
+      response.send(csv);
+    })
+
   }
 
 }

@@ -33,8 +33,8 @@ Route.group('rooms', () => {
   Route.get('/', 'RoomController.index').middleware('auth')
   Route.post('/', 'RoomController.store').middleware('auth')
   Route.get('/:id', 'RoomController.show')
-  Route.put('/:id', 'RouteController.update').middleware('auth')
-  Route.get('/export/:id', 'RouteController.export').middleware('auth')
+  Route.put('/:id', 'RoomController.update').middleware('auth')
+  Route.get('/export/:id', 'RoomController.export')
 }).prefix('/room')
 
 
