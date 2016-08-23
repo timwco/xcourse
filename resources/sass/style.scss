@@ -3,6 +3,11 @@ $base: #727d84;
 $callout: #6fbbb7;
 $light: #d1d2d4;
 
+$primary: $shield;
+$info: $base;
+
+@import 'bulma';
+
 .zeroauto {
   margin: 0 auto;
 }
@@ -64,14 +69,13 @@ div.label.label-default.admin-view {
 }
 
 .form-container {
-  background-color: lighten($light, 15%);
+  background-color: lighten($light, 10%);
   padding: 25px;
   border-radius: 4px;
   margin: 0 auto;
   h2 {
     text-align: center;
-    font-size: 25px;
-    margin-bottom: 25px;
+    padding-bottom: 25px;
   }
   .btn {
     background-color: $callout;
@@ -79,18 +83,9 @@ div.label.label-default.admin-view {
   }
 }
 
-.dateField {
-  label {
-    display: inline-block;
-    font-size: 15px;
-  }
-  input {
-    font-size: 17px;
-    padding-left: 15px;
-    color: $callout;
-  }
+.text-centered {
+  text-align: center;
 }
-
 
 .chat-window {
   .inner {

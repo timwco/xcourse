@@ -4,12 +4,12 @@ var gulp = require('gulp'),
     buffer = require('vinyl-buffer'),
     babel = require('babelify'),
     sass = require('gulp-sass'),
-    watch = require('gulp-watch'),
-    fs = require('fs');
+    sassImport  = require('sass-module-importer'),
+    watch = require('gulp-watch');
 
 gulp.task('build:css', function () {
   gulp.src('./resources/sass/style.scss')
-    .pipe(sass())
+    .pipe(sass({ importer: sassImport() }))
     .pipe(gulp.dest('./public/'));
 });
 

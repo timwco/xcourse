@@ -4,23 +4,23 @@
 
 
 <form class="forms form-container" ng-submit="vm.register(info, roomID)">
-  <row>
-    <column cols="12" class="dateField">
-      <h2>Registration</h2>
-      <p class="text-centered">Fill out the form below to view the lesson notes and to gain access to messages your instructor posts during the event.</p>
-      <label>Full Name <span class="req">*</span></label>
-      <input type="text" ng-model="info.name">
-      <br>
-      <label>Email Address<span class="req">*</span></label>
-      <input type="email" ng-model="info.email">
-      <br>
-      <label>Room ID <span class="req">*</span></label>
-      <input type="text" ng-model="roomID" class="width-2">
-    </colunm>
-  </row>
-  <row>
-    <column cols="12">
-      <button class="btn">View Room</button>
-    </colunm>
-  </row>
+  <h2 class="title">Event Registration</h2>
+
+  <p class="text-centered subtitle">Fill out the form below to view the lesson notes and to gain access to messages your instructor posts during the event.</p>
+
+  <label class="label">Full Name <span class="req">*</span></label>
+  <p class="control">
+    <input class="input" type="text" ng-model="info.name">
+  </p>
+  <label class="label">Email Address<span class="req">*</span></label>
+  <p class="control">
+    <input class="input" type="email" ng-model="info.email">
+  </p>
+  <label class="label">Room ID <span class="req">*</span></label>
+  <p class="label">
+    <input class="input" type="text" ng-model="roomID" class="width-2">
+  </p><br>
+  <p class="control">
+    <button class="button is-primary" class="btn">View Room</button>
+  </p>
 </form>

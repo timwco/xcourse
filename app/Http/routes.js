@@ -18,7 +18,7 @@
 const Route = use('Route')
 
 // Main Route - Loads AngularJS Main Page
-Route.on('/').render('main')
+Route.on('/').render('index')
 
 // Auth Routes
 Route.group('auth', () => {
