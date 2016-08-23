@@ -26,8 +26,6 @@ let AdminController = function(RoomService, AuthService, $stateParams, $state, $
   // Verify User Logged in
   function activate() {
 
-    console.log($stateParams);
-
     if ($stateParams.c === '1') { vm.alert = true; }
     if ($stateParams.c === '2') { vm.noData = true; }
 
@@ -39,17 +37,21 @@ let AdminController = function(RoomService, AuthService, $stateParams, $state, $
     let token = $cookies.get('token');
 
     if (token) {
-      AuthService.verify(token).then( (res) => {
-        vm.authed = res.data.authed;
-        if (vm.authed) {
+      AuthService.verify(token).then( 
+        res => {
+          vm.authed = res.data.authed;
           loadRooms();
-        }
-      });
+        },
+        res => genURL());
     } else {
-      AuthService.genURL().then( res => {
-        vm.googleURL = res.data.url;
-      });
+      genURL();
     }
+  }
+
+  function genURL () {
+    AuthService.genURL().then( res => {
+      vm.googleURL = res.data.url;
+    });
   }
 
   function onClickTab (tab) {

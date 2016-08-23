@@ -46463,8 +46463,6 @@ var AdminController = function AdminController(RoomService, AuthService, $stateP
   // Verify User Logged in
   function activate() {
 
-    console.log($stateParams);
-
     if ($stateParams.c === '1') {
       vm.alert = true;
     }
@@ -46482,15 +46480,19 @@ var AdminController = function AdminController(RoomService, AuthService, $stateP
     if (token) {
       AuthService.verify(token).then(function (res) {
         vm.authed = res.data.authed;
-        if (vm.authed) {
-          loadRooms();
-        }
+        loadRooms();
+      }, function (res) {
+        return genURL();
       });
     } else {
-      AuthService.genURL().then(function (res) {
-        vm.googleURL = res.data.url;
-      });
+      genURL();
     }
+  }
+
+  function genURL() {
+    AuthService.genURL().then(function (res) {
+      vm.googleURL = res.data.url;
+    });
   }
 
   function onClickTab(tab) {
