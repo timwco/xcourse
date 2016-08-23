@@ -16,7 +16,7 @@
       <tr ng-repeat="room in vm.rooms">
         <td>{{ room.class | capname }}</td>
         <td>{{ room.date }}</td>
-        <td><a href="/#/room/{{ room.roomID }}" class="button is-small is-link">View</a></td>
+        <td><a href="/#/room/{{ room.id }}" class="button is-small is-link">View</a></td>
         <td><a href="/room/export/{{ room.id }}" class="button is-small is-dark">Export</td>
       </tr>
     </tbody>

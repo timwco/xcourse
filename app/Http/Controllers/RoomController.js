@@ -21,7 +21,6 @@ class RoomController {
     const count = yield Database.from('rooms').count('id as id')
 
     let room = {
-      roomID : count[0].id + 1,
       name   : input.class + '-' + input.date,
       date   : input.date,
       class  : input.class,
@@ -50,8 +49,8 @@ class RoomController {
 
   * export (request, response) {
 
-    const roomID = request.param('id');
-    const guests = yield Guest.query().where('roomID', roomID).fetch();
+    const roomId = request.param('id');
+    const guests = yield Guest.query().where('roomId', roomId).fetch();
 
     let fields = ['name', 'date', 'class', 'email'];
     if (guests.value().length < 1) { return response.redirect('/#/admin?c=2') }
@@ -59,7 +58,7 @@ class RoomController {
 
     json2csv({ data: allGuests, fields: fields }, function (err, csv) {
       if (err) console.log(err);
-      response.header('Content-disposition', 'attachment; filename='+ `room-${roomID}-export.csv`);
+      response.header('Content-disposition', 'attachment; filename='+ `room-${roomId}-export.csv`);
       response.send(csv);
     })
 

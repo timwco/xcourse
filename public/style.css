@@ -3875,6 +3875,26 @@ header {
   margin: 50px auto;
   position: initial; }
 
+.panel {
+  border: 1px solid #233139; }
+
+.panel-heading {
+  background-color: #233139;
+  color: white; }
+
+.panel-block .delete, .panel-block .modal-close {
+  float: right;
+  height: 20px;
+  width: 20px;
+  margin-top: -2px; }
+
+.messages:nth-child(even) {
+  background-color: white; }
+
+.messages:before {
+  content: "\00bb";
+  padding-right: 6px; }
+
 .form-container {
   background-color: white;
   padding: 25px;
@@ -3889,48 +3909,6 @@ header {
 
 .text-centered {
   text-align: center; }
-
-.chat-window .inner {
-  border: 1px solid #233139;
-  border-radius: 4px 4px 0 0;
-  background-color: #f9f9f9;
-  position: relative;
-  padding-bottom: 40px; }
-  .chat-window .inner h4 {
-    background-color: #d1d2d4;
-    border-radius: 4px 4px 0 0;
-    text-align: center;
-    padding: 5px 0;
-    margin: 1px;
-    color: #233139; }
-  .chat-window .inner ul {
-    margin: 0;
-    padding: 15px;
-    list-style: none; }
-    .chat-window .inner ul li {
-      padding: 0 5px;
-      position: relative; }
-      .chat-window .inner ul li:before {
-        content: "\00bb";
-        padding-right: 8px; }
-      .chat-window .inner ul li:nth-child(even) {
-        background-color: #ebeced; }
-      .chat-window .inner ul li .delete, .chat-window .inner ul li .modal-close {
-        display: none;
-        position: absolute;
-        right: 5px;
-        top: 5px; }
-      .chat-window .inner ul li:hover .delete, .chat-window .inner ul li:hover .modal-close {
-        display: block; }
-  .chat-window .inner form, .chat-window .inner section {
-    margin-bottom: 0; }
-  .chat-window .inner form {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    left: 0; }
-    .chat-window .inner form input {
-      border-top: 3px solid #233139; }
 
 .tabsList {
   display: block;

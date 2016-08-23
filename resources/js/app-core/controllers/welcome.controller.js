@@ -24,17 +24,17 @@ let WelcomeController = function($http, RoomService, $state, $cookies, $statePar
     }
   }
 
-  function register(info, roomID) {
+  function register(info, roomId) {
 
-    RoomService.get(roomID).then( (res) => {
+    RoomService.get(roomId).then( (res) => {
 
       info.class = res.data.class;
       info.date  = res.data.date;
-      info.roomID = res.data.id;
+      info.roomId = res.data.id;
 
       $http.post('/register', info).then( (res) => {
-        $cookies.put('tiy_cc_reg', roomID);
-        $state.go('root.singleRoom', { id: roomID });
+        $cookies.put('tiy_cc_reg', roomId);
+        $state.go('root.singleRoom', { id: roomId });
       });
 
     });

@@ -74,7 +74,7 @@ let AdminController = function(RoomService, AuthService, $stateParams, $state, $
 
   function createRoom (data) {
     RoomService.create(data).then( (res) => {
-      $state.go('root.singleRoom', { id: res.data.roomID });
+      $state.go('root.singleRoom', { id: res.data.roomId });
     });
   }
 
