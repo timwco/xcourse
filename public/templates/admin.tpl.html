@@ -1,5 +1,3 @@
-<div class="admin-view label label-default" ng-show="vm.authed">Administrator</div>
-
 <div class="notification is-warning text-centered" ng-show="vm.alert">Sorry, we couldn't log you in. Make sure this is coming from an `@theironyard.com` email address.</div>
 
 <div class="text-centered control" ng-hide="vm.authed">
@@ -9,13 +7,12 @@
 <div class="adminContainer" ng-show="vm.authed">
 
   <div class="tabContainer">
-		<ul class="tabsList">
+		<ul class="tabsList tabs">
 		  <li ng-repeat="tab in vm.tabs" 
-          ng-class="{active:vm.isActiveTab(tab.url)}" 
+          ng-class="{'is-active':vm.isActiveTab(tab.url)}" 
           ng-click="vm.onClickTab(tab)">
-        <button small outline>{{ tab.title }}</button>
+        <a href="">{{ tab.title }}</a>
       </li>
-      <li class="align-right"><a href="/#/logout"><button small outline>Log Out</button></li></a>
 		</ul>
     <row class="tabContent" ng-include="vm.tabContent"></row>
   </div>

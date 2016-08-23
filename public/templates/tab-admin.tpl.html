@@ -1,20 +1,21 @@
 <column cols="12">
-  <h3 class="text-centered">Past Events</h3>
 
   <div class="alert alert-error text-centered" ng-show="vm.noData">Sorry, there are no attendees for that room.</div>
 
-  <table class="table-stripped width-12 zeroauto">
-    <tbody>
+  <table class="table">
+    <thead>
       <tr>
         <th>Class</th>
         <th>Date</th>
         <th colspan="2">Tools</th>
       </tr>
+    </thead>
+    <tbody>
       <tr ng-repeat="room in vm.rooms">
         <td>{{ room.class | capname }}</td>
         <td>{{ room.date }}</td>
-        <td><a href="/#/room/{{ room.roomID }}">View</a></td>
-        <td><a href="/room/export/{{ room.id }}">Export</td>
+        <td><a href="/#/room/{{ room.roomID }}" class="button is-small is-link">View</a></td>
+        <td><a href="/room/export/{{ room.id }}" class="button is-small is-dark">Export</td>
         <!--<td><a href="" class="badge badge-error" ng-click="vm.deleteRoom(room.roomID)">x</a>-->
       </tr>
     </tbody>
