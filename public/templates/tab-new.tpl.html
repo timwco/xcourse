@@ -1,35 +1,26 @@
-<column cols="12">
-  <form class="forms form-container" ng-submit="vm.createRoom(room)">
-    <row>
-      <column cols="12" class="dateField">
-        <h2>Create an Event Room</h2>
-        <label>Crash Course Date</label>
-        <input type="text" id="datepicker" ng-model="room.date">
-      </column>
-    </row>
-    <row>
-      <column cols="12">
-        <select class="select" ng-model="room.class">
-            <option value="">Which Class?</option>
-            <option value="js">JavaScript</option>
-            <option value="rb">Ruby</option>
-            <option value="de">Design</option>
-            <option value="ios">iOS</option>
-            <option value="java">Java</option>
-            <option value="net">.NET</option>
-        </select>
-      </column>
-    </row>
-    <row>
-      <column cols="12">
-        <label>Details <small>(supports markdown)</small></label>
-        <textarea rows="6" ng-model="room.description"></textarea>
-      </colunm>
-    </row>
-    <row>
-      <column cols="12">
-        <button class="btn">Create Room</button>
-      </colunm>
-    </row>
-  </form>
-</column>
+<form ng-submit="vm.createRoom(room)">
+  <label class="label">Crash Course Date</label>
+  <p class="control">
+    <input class="input" type="text" id="datepicker" ng-model="room.date">
+  </p>
+  <p class="control">
+    <span class="select">
+      <select ng-model="room.class">
+        <option value="">Which Class?</option>
+        <option value="js">JavaScript</option>
+        <option value="rb">Ruby</option>
+        <option value="de">Design</option>
+        <option value="ios">iOS</option>
+        <option value="java">Java</option>
+        <option value="net">.NET</option>
+      </select>
+    </span>
+  </p>
+  <label class="label">Details <small>(supports markdown)</small></label>
+  <p class="control">
+    <textarea class="textarea" ng-model="room.description"></textarea>
+  </p>
+  <p class="control">
+    <button class="button is-primary">Create Room</button>
+  </p>
+</form>

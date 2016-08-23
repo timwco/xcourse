@@ -3829,6 +3829,9 @@ a.panel-block:hover {
 .pad-right {
   padding-right: 10px; }
 
+.pad-left {
+  padding-left: 10px; }
+
 .footer {
   text-align: right;
   font-size: 11px;
@@ -3873,7 +3876,7 @@ header {
   position: initial; }
 
 .form-container {
-  background-color: #ebeced;
+  background-color: white;
   padding: 25px;
   border-radius: 4px;
   margin: 0 auto; }

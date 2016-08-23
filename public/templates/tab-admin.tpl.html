@@ -1,6 +1,8 @@
 <column cols="12">
 
-  <div class="alert alert-error text-centered" ng-show="vm.noData">Sorry, there are no attendees for that room.</div>
+  <div class="notification is-warning text-centered" ng-show="vm.noData">
+    Sorry, there are no attendees for that room.
+  </div>
 
   <table class="table">
     <thead>
@@ -16,7 +18,6 @@
         <td>{{ room.date }}</td>
         <td><a href="/#/room/{{ room.roomID }}" class="button is-small is-link">View</a></td>
         <td><a href="/room/export/{{ room.id }}" class="button is-small is-dark">Export</td>
-        <!--<td><a href="" class="badge badge-error" ng-click="vm.deleteRoom(room.roomID)">x</a>-->
       </tr>
     </tbody>
   </table>

@@ -18,9 +18,8 @@ $info: $base;
   font-size: 15px;
 }
 
-.pad-right {
-  padding-right: 10px;
-}
+.pad-right { padding-right: 10px; }
+.pad-left { padding-left: 10px; }
 
 .footer {
   text-align: right;
@@ -78,7 +77,7 @@ header {
 }
 
 .form-container {
-  background-color: lighten($light, 10%);
+  background-color: white;
   padding: 25px;
   border-radius: 4px;
   margin: 0 auto;
