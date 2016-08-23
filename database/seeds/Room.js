@@ -15,7 +15,6 @@ class RoomSeeder {
       }
 
       return {
-        roomID: room.roomID,
         name: room.name,
         date: room.date,
         class: room.class,

@@ -17,7 +17,7 @@ class GuestSeeder {
         name: guest.name,
         email: guest.email,
         class: guest.class,
-        roomID: guest.roomID,
+        roomId: guest.roomID,
         date: guest.date
       }
     })

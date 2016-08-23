@@ -8,7 +8,7 @@ class CreateGuestsSchema extends Schema {
     this.create('guests', (table) => {
       table.increments()
       table.string('name')
-      table.integer('roomID')
+      table.integer('roomId')
       table.string('email')
       table.string('class')
       table.string('date')

@@ -9,7 +9,6 @@ class CreateRoomsSchema extends Schema {
       table.increments()
       table.string('name')
       table.string('class')
-      table.integer('roomID')
       table.text('desc')
       table.string('date')
       table.timestamps()
