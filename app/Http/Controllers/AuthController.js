@@ -9,8 +9,8 @@ class AuthController {
     response.json({ authed: true })
   }
 
-  * url (request, response) {
-    response.json({ url: request.googleURL })
+  * login (request, response) {
+    yield response.sendView('login', { url: request.googleURL });
   }
 
   * callback (request, response) {

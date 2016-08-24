@@ -4,10 +4,6 @@
 
 {#<div class="notification is-warning text-centered" ng-show="vm.alert">
   Sorry, we couldn't log you in. Make sure this is coming from an `@theironyard.com` email address.
-</div>
-
-<div class="text-centered control" ng-hide="vm.authed">
-  <a ng-href="{{ vm.googleURL }}" class="button google-login is-large" big>Google Login</a>
 </div>#}
 
 <div class="adminContainer">
@@ -33,8 +29,8 @@
         <tr>
           <td>{{ room.class | classmap }}</td>
           <td>{{ room.date }}</td>
-          <td><a href="/room/{{ room.id }}" class="button is-small is-link">View</a></td>
-          <td><a href="/room/export/{{ room.id }}" class="button is-small is-dark">Export</td>
+          <td><a href="/rooms/{{ room.id }}" class="button is-small is-link">View</a></td>
+          <td><a href="/rooms/export/{{ room.id }}" class="button is-small is-dark">Export</td>
         </tr>
       {% endfor %}
     </tbody>

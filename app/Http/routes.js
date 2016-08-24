@@ -23,6 +23,7 @@ Route.get('/rooms', 'RoomController.index')
 Route.get('/rooms/new').render('rooms-new')
 Route.get('/rooms/:id', 'RoomController.show')
 Route.post('/rooms/new', 'RoomController.store')
+Route.get('/login', 'AuthController.login').middleware('googleURL')
 
 // Auth Routes
 Route.group('auth', () => {
@@ -37,9 +38,9 @@ Route.group('rooms', () => {
   // Route.get('/', 'RoomController.index').middleware('auth')
   // Route.post('/', 'RoomController.store')
   // Route.get('/:id', 'RoomController.show')
-  Route.put('/:id', 'RoomController.update').middleware('auth')
+  // Route.put('/:id', 'RoomController.update').middleware('auth')
   Route.get('/export/:id', 'RoomController.export')
-}).prefix('/room')
+}).prefix('/rooms')
 
 
 // Guest Routes
