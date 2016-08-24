@@ -41591,7 +41591,6 @@ function FirebaseController(FireChat, $location) {
   function init() {
     // Get Room ID from URL
     var url = window.location.href;
-    console.log(url);
     var id = url.substr(url.lastIndexOf('/') + 1);
 
     // Initialize the Firebase Chat Array/Obj
