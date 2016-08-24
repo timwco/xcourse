@@ -12,6 +12,12 @@ const Http = exports = module.exports = {}
  * @param  {Object} response
  */
 Http.handleError = function * (error, request, response) {
+
+  if (error.status === 401) {
+    yield response.sendView('errors/auth')
+    return
+  }
+
   /**
    * DEVELOPMENT REPORTER
    */
