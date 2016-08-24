@@ -38,4 +38,40 @@ Http.handleError = function * (error, request, response) {
  * starting http server.
  */
 Http.onStart = function () {
+
+  const View = use('View')
+
+  View.filter('uppercase', string => {
+    return string.toUpperCase();
+  })
+
+  View.filter('classmap', abrv => {
+    let className = abrv;
+    switch (abrv) {
+      case 'rb':
+        className = 'Ruby';
+      break;
+      case 'js':
+        className = 'JavaScript';
+      break;
+      case 'de':
+        className = 'Design';
+      break;
+      case 'ios':
+        className = 'iOS';
+      break;
+      case 'java':
+        className = 'Java';
+      break;
+      case 'net':
+        className = '.NET';
+      break;
+      default:
+        className = abrv;
+      break;
+    }
+
+    return className;
+  })
+
 }

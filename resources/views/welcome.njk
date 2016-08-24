@@ -1,5 +1,9 @@
+{% extends 'layout' %}
+
+{% block content %}
+
 <!-- Notifications -->
-<div class="notification is-warning text-centered" ng-show="vm.showUnregister">
+{#<div class="notification is-warning text-centered" ng-show="vm.showUnregister">
   Yo, please register first.
 </div>
 <div class="notification is-warning text-centered" ng-show="vm.noRoom">
@@ -7,7 +11,7 @@
 </div>
 <div class="notification is-warning text-centered" ng-show="vm.showRoomAccess">
   Sorry, You only have access to <a href="/#/room/{{ vm.roomAccessible }}">this room</a>.
-</div>
+</div>#}
 <!-- /Notifications -->
 
 
@@ -35,3 +39,5 @@
     <button class="button is-primary" class="btn">View Room</button>
   </p>
 </form>
+
+{% endblock %}

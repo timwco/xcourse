@@ -1,0 +1,35 @@
+{% extends 'layout' %}
+
+{% block content %}
+
+<div class="columns">
+  
+  <div class="column course-description is-5">
+    <h2 class="title">{{ room.class | classmap }} Crash Course</h2>
+    <i class="tag is-primary">{{ room.date }}</i>
+    <div class="text">{{ room.desc | safe }}</div>
+  </div>
+
+  <div class="column is-7">
+    <nav class="panel">
+      <p class="panel-heading">Chat Window</p>
+
+      {#<div class="panel-block messages" ng-repeat="message in vm.messages">
+        <span ng-bind-html="message.$value | linkify"></span>
+        <button ng-click="vm.deleteMessage(message)" ng-show="vm.authed" class="delete"></button>
+      </div>
+
+      <div class="panel-block">
+        <form ng-submit="vm.addMessage(vm.message)" ng-show="vm.authed">
+          <p class="control">
+            <input autocomplete="off" type="text" ng-model="vm.message" class="input" />
+          </p>
+        </form>
+      </div>#}
+
+    </nav>
+  </div>
+
+</div>
+
+{% endblock %}

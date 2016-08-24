@@ -12,13 +12,12 @@ class RoomController {
 
   * index (request, response) {
     const rooms = yield Room.all();
-    return response.json(rooms);
+    yield response.sendView('rooms', { rooms });
   }
 
   * store (request, response) {
 
     const input = request.all();
-    const count = yield Database.from('rooms').count('id as id')
 
     let room = {
       name   : input.class + '-' + input.date,
@@ -28,7 +27,7 @@ class RoomController {
     }
     room = yield Room.create(room);
 
-    return response.json(room);
+    return response.redirect(`/rooms/${room.id}`);
   }
 
   * show (request, response) {
@@ -37,7 +36,7 @@ class RoomController {
 
     if (room) {
       room.desc = md.render(room.desc);
-      return response.json(room);
+      yield response.sendView('room', { room });
     } else {
       return response.json({ noRoom: true })
     }   

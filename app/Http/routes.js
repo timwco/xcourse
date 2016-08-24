@@ -17,8 +17,12 @@
 
 const Route = use('Route')
 
-// Main Route - Loads AngularJS Main Page
-Route.on('/').render('index')
+// Main Routes for Pages
+Route.on('/').render('welcome')
+Route.get('/rooms', 'RoomController.index')
+Route.get('/rooms/new').render('rooms-new')
+Route.get('/rooms/:id', 'RoomController.show')
+Route.post('/rooms/new', 'RoomController.store')
 
 // Auth Routes
 Route.group('auth', () => {
@@ -30,9 +34,9 @@ Route.group('auth', () => {
 
 // Room Routes
 Route.group('rooms', () => {
-  Route.get('/', 'RoomController.index').middleware('auth')
-  Route.post('/', 'RoomController.store').middleware('auth')
-  Route.get('/:id', 'RoomController.show')
+  // Route.get('/', 'RoomController.index').middleware('auth')
+  // Route.post('/', 'RoomController.store')
+  // Route.get('/:id', 'RoomController.show')
   Route.put('/:id', 'RoomController.update').middleware('auth')
   Route.get('/export/:id', 'RoomController.export')
 }).prefix('/room')
