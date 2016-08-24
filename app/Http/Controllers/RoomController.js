@@ -12,7 +12,8 @@ class RoomController {
 
   * index (request, response) {
     const rooms = yield Room.all();
-    yield response.sendView('rooms', { rooms });
+    console.log(request.currentUser);
+    yield response.sendView('rooms', { rooms: rooms });
   }
 
   * store (request, response) {

@@ -13,6 +13,11 @@ class AuthController {
     yield response.sendView('login', { url: request.googleURL });
   }
 
+  * logout (request, response) {
+    yield request.auth.logout()
+    return response.redirect('/');
+  }
+
   * callback (request, response) {
 
     const profile = request.googleProfile;
@@ -21,12 +26,11 @@ class AuthController {
     if (profile && this.validateTIY(profile)) {
 
       let user = yield this.createUser(profile);
-      let token = yield request.auth.generate(user);
+      yield request.auth.login(user)
 
-      // Dirty... super dirty
-      response.redirect('/#/admin?a=' + token);
+      response.redirect('/?yay');
 
-    } else { response.redirect('/#/admin?c=1') }
+    } else { response.redirect('/?boooo'); }
   }
 
   validateTIY (profile) {

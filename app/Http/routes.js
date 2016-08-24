@@ -19,17 +19,20 @@ const Route = use('Route')
 
 // Main Routes for Pages
 Route.on('/').render('welcome')
-Route.get('/rooms', 'RoomController.index')
-Route.get('/rooms/new').render('rooms-new')
+Route.get('/rooms', 'RoomController.index').middleware('auth')
+Route.get('/rooms/new').render('rooms-new').middleware('auth')
 Route.get('/rooms/:id', 'RoomController.show')
-Route.post('/rooms/new', 'RoomController.store')
+Route.post('/rooms/new', 'RoomController.store').middleware('auth')
 Route.get('/login', 'AuthController.login').middleware('googleURL')
+Route.get('/logout', 'AuthController.logout')
+Route.get('/auth/google/callback', 'AuthController.callback').middleware('googleLogin')
+Route.get('/rooms/export/:id', 'RoomController.export').middleware('auth')
 
 // Auth Routes
 Route.group('auth', () => {
   Route.get('/verify', 'AuthController.verify').middleware('auth')
-  Route.get('/url', 'AuthController.url').middleware('googleURL')
-  Route.get('/google/callback', 'AuthController.callback').middleware('googleLogin')
+  // Route.get('/url', 'AuthController.url').middleware('googleURL')
+  
 }).prefix('/auth')
 
 
@@ -39,7 +42,7 @@ Route.group('rooms', () => {
   // Route.post('/', 'RoomController.store')
   // Route.get('/:id', 'RoomController.show')
   // Route.put('/:id', 'RoomController.update').middleware('auth')
-  Route.get('/export/:id', 'RoomController.export')
+  
 }).prefix('/rooms')
 
 
