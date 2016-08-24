@@ -7,13 +7,14 @@ const Database = use('Database')
 const MarkdownIt  = require('markdown-it')
 const md          = new MarkdownIt()
 const json2csv    = require('json2csv')
+const _           = require('lodash')
 
 class RoomController {
 
   * index (request, response) {
-    const rooms = yield Room.all();
-    console.log(request.currentUser);
-    yield response.sendView('rooms', { rooms: rooms });
+    let rooms = yield Room.all();
+    rooms = _.reverse(rooms.value())
+    yield response.sendView('rooms', { rooms });
   }
 
   * store (request, response) {
@@ -47,13 +48,21 @@ class RoomController {
 
   }
 
+  * destroy (request, response) {
+    const room = yield Room.findBy('id', request.param('id'));
+    yield room.delete();
+    response.redirect('/rooms')
+  }
+
   * export (request, response) {
 
     const roomId = request.param('id');
     const guests = yield Guest.query().where('roomId', roomId).fetch();
 
     let fields = ['name', 'date', 'class', 'email'];
-    if (guests.value().length < 1) { return response.redirect('/#/admin?c=2') }
+    if (guests.value().length < 1) { 
+      return response.send('Sorry, no guests to export for that room.'); 
+    }
     let allGuests = guests.value().map( guest => guest.attributes)
 
     json2csv({ data: allGuests, fields: fields }, function (err, csv) {

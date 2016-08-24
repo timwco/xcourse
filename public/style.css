@@ -3916,6 +3916,9 @@ header {
 .text-centered {
   text-align: center; }
 
+.table {
+  border: 1px solid #d1d2d4; }
+
 .tabsList {
   display: block;
   margin: 0;

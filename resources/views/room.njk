@@ -10,23 +10,28 @@
     <div class="text">{{ room.desc | safe }}</div>
   </div>
 
-  <div class="column is-7">
+  <div class="column is-7" ng-app="app" ng-controller="FirebaseController as vm">
     <nav class="panel">
       <p class="panel-heading">Chat Window</p>
 
-      {#<div class="panel-block messages" ng-repeat="message in vm.messages">
+      <div class="panel-block messages" ng-repeat="message in vm.messages">
         <span ng-bind-html="message.$value | linkify"></span>
-        <button ng-click="vm.deleteMessage(message)" ng-show="vm.authed" class="delete"></button>
+        {% if me %}
+          <button ng-click="vm.deleteMessage(message)" class="delete"></button>
+        {% endif %}
       </div>
 
+      
       <div class="panel-block">
-        <form ng-submit="vm.addMessage(vm.message)" ng-show="vm.authed">
+        {% if me %}
+        <form ng-submit="vm.addMessage(vm.message)">
           <p class="control">
             <input autocomplete="off" type="text" ng-model="vm.message" class="input" />
           </p>
         </form>
-      </div>#}
-
+        {% endif %}
+      </div>
+      
     </nav>
   </div>
 

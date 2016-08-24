@@ -1,4 +1,5 @@
 import Pikaday from 'pikaday';
+import './firebase-chat';
 
 // Load Date Picker
 let date = document.getElementById('datepicker');

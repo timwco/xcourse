@@ -2,19 +2,13 @@
 
 {% block content %}
 
-{#<div class="notification is-warning text-centered" ng-show="vm.alert">
-  Sorry, we couldn't log you in. Make sure this is coming from an `@theironyard.com` email address.
-</div>#}
-
 <div class="adminContainer">
 
-  {#<div class="notification is-warning text-centered" ng-show="vm.noData">
-    Sorry, there are no attendees for that room.
-  </div>#}
-
-  <div class="align-right pad-bottom">
-    <a href="/rooms/new" class="button is-primary">Create New Event</a>
-  </div>
+  {% if empty %}
+    <div class="notification is-warning text-centered">
+      Sorry, there are no guests to export for that room.
+    </div>
+  {% endif %}
 
   <table class="table">
     <thead>
@@ -25,12 +19,13 @@
       </tr>
     </thead>
     <tbody>
-      {% for room in rooms.toJSON() %}
+      {% for room in rooms %}
         <tr>
           <td>{{ room.class | classmap }}</td>
           <td>{{ room.date }}</td>
           <td><a href="/rooms/{{ room.id }}" class="button is-small is-link">View</a></td>
-          <td><a href="/rooms/export/{{ room.id }}" class="button is-small is-dark">Export</td>
+          <td><a href="/rooms/export/{{ room.id }}" class="button is-small is-dark">Export</a></td>
+          {#<td><a href="/rooms/delete/{{ room.id }}" class="delete room-delete"></a></td>#}
         </tr>
       {% endfor %}
     </tbody>

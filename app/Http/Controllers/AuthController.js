@@ -4,11 +4,6 @@ const User = use('App/Model/User')
 
 class AuthController {
 
-
-  * verify (request, response) {
-    response.json({ authed: true })
-  }
-
   * login (request, response) {
     yield response.sendView('login', { url: request.googleURL });
   }
