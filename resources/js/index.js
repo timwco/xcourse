@@ -1,12 +1,6 @@
-import Pikaday from 'pikaday';
-import './firebase-chat';
+import './features/utilities';
+import './features/stats';
+import './features/firebase-chat';
 
-// Load Date Picker
-let date = document.getElementById('datepicker');
-if (date) {
-  new Pikaday({
-    field: date,
-    format: 'MMM D, YYYY',
-    position: 'bottom left'
-  });
-}
+
+// Silence is Golden
