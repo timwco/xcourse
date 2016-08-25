@@ -11,7 +11,7 @@ class EventSeeder {
     let modEvents = events.map( event => {
       
       if (typeof event.date === 'object') {
-        event.date = moment(event.date['$date']).format('MMMM, Do YYYY')
+        event.date = moment(event.date['$date']).format('MMMM Do YYYY')
       }
 
       return {

@@ -3826,6 +3826,12 @@ a.panel-block:hover {
   font-weight: bold;
   font-size: 15px; }
 
+.event-choice {
+  cursor: pointer; }
+  .event-choice.active {
+    background-color: #233139;
+    color: white; }
+
 .pad-right {
   padding-right: 10px; }
 
@@ -3850,12 +3856,16 @@ a.panel-block:hover {
   position: relative; }
 
 header {
-  margin-top: 25px;
+  margin-top: 15px;
   text-align: center; }
   header img {
-    width: 125px; }
+    width: 100px; }
   header h1 {
     font-size: 15px; }
+
+footer.footer {
+  margin-top: 0;
+  padding-top: 0; }
 
 .admin-view {
   position: absolute;
@@ -3878,7 +3888,7 @@ header {
 .container {
   max-width: 900px;
   padding: 0 25px 25px 25px;
-  margin: 50px auto;
+  margin: 25px auto;
   position: initial; }
 
 .panel {
@@ -3912,6 +3922,9 @@ header {
   .form-container .btn {
     background-color: #6fbbb7;
     color: white; }
+
+.hideme {
+  display: none; }
 
 .text-centered {
   text-align: center; }

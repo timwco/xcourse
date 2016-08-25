@@ -18,6 +18,14 @@ $info: $base;
   font-size: 15px;
 }
 
+.event-choice {
+  cursor: pointer;
+  &.active {
+    background-color: $primary;
+    color: white;
+  }
+}
+
 .pad-right { padding-right: 10px; }
 .pad-left { padding-left: 10px; }
 .pad-bottom { padding-bottom: 10px; }
@@ -37,14 +45,19 @@ $info: $base;
 }
 
 header {
-  margin-top: 25px;
+  margin-top: 15px;
   text-align: center;
   img {
-    width: 125px;
+    width: 100px;
   }
   h1 {
     font-size: 15px;
   }
+}
+
+footer.footer {
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .admin-view {
@@ -74,7 +87,7 @@ header {
 .container {
   max-width: 900px;
   padding: 0 25px 25px 25px;
-  margin: 50px auto;
+  margin: 25px auto;
   position: initial;
 }
 
@@ -114,6 +127,10 @@ header {
     background-color: $callout;
     color: white;
   }
+}
+
+.hideme {
+  display: none;
 }
 
 .text-centered {

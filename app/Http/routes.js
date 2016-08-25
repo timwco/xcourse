@@ -18,7 +18,7 @@
 const Route = use('Route')
 
 // Welcome / Home Page Routes
-Route.on('/').render('general/welcome')
+Route.get('/', 'GuestController.welcome')
 
 // Admin Only Routes (Stats, Guests etc)
 Route.get('/stats', 'StatsController.index').middleware('auth')
@@ -38,7 +38,7 @@ Route.group('guests', () => {
 
 // Event Routes
 Route.group('events', () => {
-  Route.get('/:id', 'EventController.show')
+  Route.get('/:id', 'EventController.show').as('event')
   Route.get('/', 'EventController.index').middleware('auth')
   Route.post('/store', 'EventController.store').middleware('auth')
   Route.get('/export/:id', 'EventController.export').middleware('auth')
@@ -48,3 +48,6 @@ Route.get('/create').render('events/events-new').middleware('auth')
 
 // Guest Routes
 Route.post('/register', 'GuestController.store')
+
+// Errors
+Route.get('/errors/employee').render('errors/employee')

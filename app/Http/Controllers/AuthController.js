@@ -23,9 +23,9 @@ class AuthController {
       let user = yield this.createUser(profile);
       yield request.auth.login(user)
 
-      response.redirect('/?yay');
+      response.redirect('/');
 
-    } else { response.redirect('/?boooo'); }
+    } else { response.redirect('/errors/employee'); }
   }
 
   validateTIY (profile) {

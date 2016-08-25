@@ -2,29 +2,49 @@
 
 {% block content %}
 
-<form class="forms form-container" ng-submit="vm.register(info, eventId)">
+<div class="form-container">
+
   <h2 class="title">Event Registration</h2>
 
   <p class="text-centered subtitle">
-    Fill out the form below to view the lesson notes and to gain access<br> 
-    to messages your instructor posts during the event.
+    Please fill out he form below and specify the event you are here for. 
   </p>
 
-  <label class="label">Full Name <span class="req">*</span></label>
-  <p class="control">
-    <input class="input" type="text" ng-model="info.name">
-  </p>
-  <label class="label">Email Address<span class="req">*</span></label>
-  <p class="control">
-    <input class="input" type="email" ng-model="info.email">
-  </p>
-  <label class="label">Event ID <span class="req">*</span></label>
-  <p class="label">
-    <input class="input" type="text" ng-model="eventId" class="width-2">
-  </p><br>
-  <p class="control">
-    <button class="button is-primary" class="btn">Join Event</button>
-  </p>
-</form>
+  {% if events.length > 0 %}
+  {{ form.open({action: 'GuestController.store' }) }}
+
+    <label class="label">Full Name:</label>
+    <p class="control">
+      <input class="input" type="text" name="name">
+    </p>
+    <label class="label">Email Address:</label>
+    <p class="control">
+      <input class="input" type="email" name="email">
+    </p>
+
+    <article class="message">
+      <div class="message-header">Choose Event:</div>
+      <div class="message-body">
+        {% for event in events %}
+        <p class="control">
+          <label class="radio">
+            <input type="radio" name="event" value="{{ event.id }}-{{ event.class }}">
+            {{ event.class | classmap }} Crash Course - <small>{{ event.date }}</small>
+          </label>
+        </p>
+        {% endfor %}
+      </div>
+    </article>
+
+    <p class="control">
+      <button class="button is-primary" class="btn">Join Event</button>
+    </p>
+  {{ form.close() }}
+  {% else %}
+    <div class="notification is-warning text-centered">
+      Sorry, there are currently no events scheduled. Please check back later.
+    </div>
+  {% endif %}
+</div>
 
 {% endblock %}
