@@ -19,7 +19,7 @@ function topHTML (guests) {
   let html = '';
   guests.forEach( guest => {
     let name = guest.name.replace(/\b[a-z]/g, fl => fl.toUpperCase());
-    html += `<li><a href="/guest/${guest.id}">${name}</a></li>`;
+    html += `<li><a href="/guest/${guest.id}">(${guest.count}) ${name}</a></li>`;
   })
   return html;
 }

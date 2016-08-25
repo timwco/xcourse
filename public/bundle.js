@@ -68579,13 +68579,7 @@ var data = {
   labels: _lodash2.default.map(courses, function (course) {
     return course.toUpperCase();
   }),
-  datasets: [{
-    label: null,
-    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
-    borderColor: ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
-    borderWidth: 1,
-    data: count
-  }]
+  datasets: [{ data: count }]
 };
 
 exports.default = data;
@@ -68623,7 +68617,7 @@ function topHTML(guests) {
     var name = guest.name.replace(/\b[a-z]/g, function (fl) {
       return fl.toUpperCase();
     });
-    html += '<li><a href="/guest/' + guest.id + '">' + name + '</a></li>';
+    html += '<li><a href="/guest/' + guest.id + '">(' + guest.count + ') ' + name + '</a></li>';
   });
   return html;
 }
