@@ -68841,7 +68841,7 @@ var date = document.getElementById('datepicker');
 if (date) {
   new _pikaday2.default({
     field: date,
-    format: 'MMM D, YYYY',
+    format: 'MMMM Do YYYY',
     position: 'bottom left'
   });
 }
