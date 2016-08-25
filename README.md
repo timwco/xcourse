@@ -6,7 +6,8 @@
 - [ ] Set up error pages
 - [ ] Remove AngularJS (Firebase)
 - [ ] Consistent semi-colons :(
-- [ ] Review Login / (yay/boo)
+- [ ] Generic Events
+- [x] Review Login / (yay/boo)
 - [x] Fix Joining Room
 - [x] Remove FAKE Date in Welcome Method
 - [x] Stats Page
