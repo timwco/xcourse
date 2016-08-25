@@ -16,9 +16,38 @@ class Chart1 {
 
 
     return {
-      labels: _.map(this.courses, course => course.toUpperCase()),
+      labels: _.map(this.courses, course => this.classMap(course)),
       datasets: [{ data: count }]
     }
+  }
+
+  classMap (abrv) {
+    let className = abrv;
+    switch (abrv) {
+      case 'rb':
+        className = 'Ruby';
+      break;
+      case 'js':
+        className = 'JavaScript';
+      break;
+      case 'de':
+        className = 'Design';
+      break;
+      case 'ios':
+        className = 'iOS';
+      break;
+      case 'java':
+        className = 'Java';
+      break;
+      case 'net':
+        className = '.NET';
+      break;
+      default:
+        className = abrv;
+      break;
+    }
+
+    return className;
   }
 
 }

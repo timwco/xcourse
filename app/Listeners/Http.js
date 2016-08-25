@@ -3,6 +3,7 @@
 const Env = use('Env')
 const Ouch = use('youch')
 const Http = exports = module.exports = {}
+const gravatar = require('gravatar');
 
 /**
  * handle errors occured during a Http request.
@@ -49,6 +50,15 @@ Http.onStart = function () {
 
   View.filter('uppercase', string => {
     return string.toUpperCase();
+  })
+
+  View.filter('capall', string => {
+    return string.replace(/\b[a-z]/g, fl => fl.toUpperCase())
+  })
+
+  View.filter('gravatar', email => {
+    let img = gravatar.url(email);
+    return img;
   })
 
   View.filter('classmap', abrv => {

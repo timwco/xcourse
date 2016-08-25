@@ -14,7 +14,7 @@ class EventController {
   * index (request, response) {
     let events = yield Event.all();
     events = _.reverse(events.value())
-    yield response.sendView('events', { events });
+    yield response.sendView('events/events', { events });
   }
 
   * store (request, response) {
@@ -38,7 +38,7 @@ class EventController {
 
     if (event) {
       event.desc = md.render(event.desc);
-      yield response.sendView('event', { event });
+      yield response.sendView('events/event', { event });
     } else {
       return response.json({ noEvent: true })
     }   

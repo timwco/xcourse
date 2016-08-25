@@ -1,0 +1,39 @@
+{% extends 'layout' %}
+
+{% block content %}
+
+<div class="adminContainer">
+
+  <div class="card is-fullwidth">
+    <header class="card-header">
+      <p class="card-header-title">{{ guest.name | capall }}</p>
+      <a class="card-header-icon">
+        <i class="fa fa-angle-down"></i>
+      </a>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-128x128">
+              <img src="{{ guest.email | gravatar }}">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>Email: <strong>{{ guest.email }}</strong></p>
+              <p>This user has attended <strong>{{ events.length }}</strong> events.
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <footer class="card-footer">
+      <a class="card-footer-item" href="mailto:{{guest.email}}">Click to Email</a>
+    </footer>
+  </div>
+
+</div>
+
+
+{% endblock %}

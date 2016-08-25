@@ -68592,10 +68592,40 @@ var Chart1 = function () {
 
       return {
         labels: _lodash2.default.map(this.courses, function (course) {
-          return course.toUpperCase();
+          return _this.classMap(course);
         }),
         datasets: [{ data: count }]
       };
+    }
+  }, {
+    key: 'classMap',
+    value: function classMap(abrv) {
+      var className = abrv;
+      switch (abrv) {
+        case 'rb':
+          className = 'Ruby';
+          break;
+        case 'js':
+          className = 'JavaScript';
+          break;
+        case 'de':
+          className = 'Design';
+          break;
+        case 'ios':
+          className = 'iOS';
+          break;
+        case 'java':
+          className = 'Java';
+          break;
+        case 'net':
+          className = '.NET';
+          break;
+        default:
+          className = abrv;
+          break;
+      }
+
+      return className;
     }
   }]);
 
@@ -68659,7 +68689,7 @@ var Chart2 = function () {
         var name = guest.name.replace(/\b[a-z]/g, function (fl) {
           return fl.toUpperCase();
         });
-        html += '<li><a href="/guest/' + guest.id + '">(' + guest.count + ') ' + name + '</a></li>';
+        html += '<li><a href="/guests/' + guest.id + '">(' + guest.count + ') ' + name + '</a></li>';
       });
       return html;
     }

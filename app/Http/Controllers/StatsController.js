@@ -10,7 +10,7 @@ class StatsController {
     const guests = yield Guest.all();
     const events  = yield Event.all();
 
-    yield response.sendView('stats', { guests: guests.value(), events: events.value()});
+    yield response.sendView('general/stats', { guests: guests.value(), events: events.value()});
   }
 
 }

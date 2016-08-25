@@ -1,0 +1,29 @@
+{% extends 'layout' %}
+
+{% block content %}
+
+<div class="adminContainer">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Tools</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for guest in guests %}
+        <tr>
+          <td>{{ guest.name | capall }}</td>
+          <td>{{ guest.email }}</td>
+          <td><a href="/guests/{{ guest.id }}" class="button is-small is-link">View</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+
+{% endblock %}

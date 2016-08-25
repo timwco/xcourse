@@ -5,7 +5,7 @@ const User = use('App/Model/User')
 class AuthController {
 
   * login (request, response) {
-    yield response.sendView('login', { url: request.googleURL });
+    yield response.sendView('auth/login', { url: request.googleURL });
   }
 
   * logout (request, response) {
