@@ -30,15 +30,15 @@ Route.group('auth', () => {
   Route.get('/google/callback', 'AuthController.callback').middleware('googleLogin')
 }).prefix('/auth')
 
-// Room Routes
-Route.group('rooms', () => {
-  Route.get('/:id', 'RoomController.show')
-  Route.get('/', 'RoomController.index').middleware('auth')
-  Route.post('/store', 'RoomController.store').middleware('auth')
-  Route.get('/export/:id', 'RoomController.export').middleware('auth')
-  Route.get('/delete/:id', 'RoomController.destroy').middleware('auth')
-}).prefix('/rooms')
-Route.get('/create').render('rooms-new').middleware('auth')
+// Event Routes
+Route.group('events', () => {
+  Route.get('/:id', 'EventController.show')
+  Route.get('/', 'EventController.index').middleware('auth')
+  Route.post('/store', 'EventController.store').middleware('auth')
+  Route.get('/export/:id', 'EventController.export').middleware('auth')
+  Route.get('/delete/:id', 'EventController.destroy').middleware('auth')
+}).prefix('/events')
+Route.get('/create').render('events-new').middleware('auth')
 
 // Guest Routes
 Route.post('/register', 'GuestController.store')

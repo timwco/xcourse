@@ -2,20 +2,7 @@
 
 {% block content %}
 
-<!-- Notifications -->
-{#<div class="notification is-warning text-centered" ng-show="vm.showUnregister">
-  Yo, please register first.
-</div>
-<div class="notification is-warning text-centered" ng-show="vm.noRoom">
-  Sorry, no Room Exists for that ID
-</div>
-<div class="notification is-warning text-centered" ng-show="vm.showRoomAccess">
-  Sorry, You only have access to <a href="/#/room/{{ vm.roomAccessible }}">this room</a>.
-</div>#}
-<!-- /Notifications -->
-
-
-<form class="forms form-container" ng-submit="vm.register(info, roomId)">
+<form class="forms form-container" ng-submit="vm.register(info, eventId)">
   <h2 class="title">Event Registration</h2>
 
   <p class="text-centered subtitle">
@@ -31,12 +18,12 @@
   <p class="control">
     <input class="input" type="email" ng-model="info.email">
   </p>
-  <label class="label">Room ID <span class="req">*</span></label>
+  <label class="label">Event ID <span class="req">*</span></label>
   <p class="label">
-    <input class="input" type="text" ng-model="roomId" class="width-2">
+    <input class="input" type="text" ng-model="eventId" class="width-2">
   </p><br>
   <p class="control">
-    <button class="button is-primary" class="btn">View Room</button>
+    <button class="button is-primary" class="btn">Join Event</button>
   </p>
 </form>
 

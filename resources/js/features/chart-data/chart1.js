@@ -1,17 +1,26 @@
 import _ from 'lodash'
 
-let courses = _(bsStats.rooms).map('class').uniq().value();
+class Chart1 {
 
-let count = _.map(courses, course => {
-  return bsStats.guests.filter( guest => {
-    return guest.class === course;
-  }).length
-})
+  constructor () {
+    this.courses = _(bsStats.events).map('class').uniq().value();
+    this.guests  = bsStats.guests;
+  }
+
+  data () {
+    let count = _.map(this.courses, course => {
+      return this.guests.filter( guest => {
+        return guest.class === course;
+      }).length
+    })
 
 
-let data = {
-  labels: _.map(courses, course => course.toUpperCase()),
-  datasets: [{ data: count }]
+    return {
+      labels: _.map(this.courses, course => course.toUpperCase()),
+      datasets: [{ data: count }]
+    }
+  }
+
 }
 
-export default data;
+export default Chart1;

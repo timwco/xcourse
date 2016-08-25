@@ -2,7 +2,7 @@
 
 const Lucid = use('Lucid')
 
-class Room extends Lucid {
+class Event extends Lucid {
 
   guests () {
     return this.hasMany('App/Model/Guest')
@@ -10,4 +10,4 @@ class Room extends Lucid {
 
 }
 
-module.exports = Room
+module.exports = Event

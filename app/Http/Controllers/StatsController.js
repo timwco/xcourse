@@ -1,16 +1,16 @@
 'use strict' 
 
 const Guest = use('App/Model/Guest')
-const Room  = use('App/Model/Room')
+const Event  = use('App/Model/Event')
 
 class StatsController {
 
   * index (request, response) {
 
     const guests = yield Guest.all();
-    const rooms  = yield Room.all();
+    const events  = yield Event.all();
 
-    yield response.sendView('stats', { guests: guests.value(), rooms: rooms.value()});
+    yield response.sendView('stats', { guests: guests.value(), events: events.value()});
   }
 
 }

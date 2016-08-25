@@ -5,9 +5,9 @@
 <div class="columns">
   
   <div class="column course-description is-5">
-    <h2 class="title">{{ room.class | classmap }} Crash Course</h2>
-    <i class="tag is-primary">{{ room.date }}</i>
-    <div class="text">{{ room.desc | safe }}</div>
+    <h2 class="title">{{ event.class | classmap }} Crash Course</h2>
+    <i class="tag is-primary">{{ event.date }}</i>
+    <div class="text">{{ event.desc | safe }}</div>
   </div>
 
   <div class="column is-7" ng-app="app" ng-controller="FirebaseController as vm">

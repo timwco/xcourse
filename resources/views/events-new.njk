@@ -3,7 +3,7 @@
 {% block content %}
 
 <h2 class="title">Create Event</h2>
-{{ form.open({action: 'RoomController.store' }) }}
+{{ form.open({action: 'EventController.store' }) }}
   <label class="label">Crash Course Date</label>
   <p class="control">
     <input class="input" type="text" id="datepicker" name="date">
@@ -26,7 +26,7 @@
     <textarea class="textarea" name="description"></textarea>
   </p>
   <p class="control">
-    <button class="button is-primary">Create Room</button>
+    <button class="button is-primary">Create Event</button>
   </p>
 {{ form.close() }}
 

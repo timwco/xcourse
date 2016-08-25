@@ -1,6 +1,6 @@
 'use strict'
 
-const Room = use('App/Model/Room')
+const Event = use('App/Model/Event')
 const Guest = use('App/Model/Guest')
 const Database = use('Database')
 
@@ -9,38 +9,38 @@ const md          = new MarkdownIt()
 const json2csv    = require('json2csv')
 const _           = require('lodash')
 
-class RoomController {
+class EventController {
 
   * index (request, response) {
-    let rooms = yield Room.all();
-    rooms = _.reverse(rooms.value())
-    yield response.sendView('rooms', { rooms });
+    let events = yield Event.all();
+    events = _.reverse(events.value())
+    yield response.sendView('events', { events });
   }
 
   * store (request, response) {
 
     const input = request.all();
 
-    let room = {
+    let event = {
       name   : input.class + '-' + input.date,
       date   : input.date,
       class  : input.class,
       desc   : input.description
     }
-    room = yield Room.create(room);
+    event = yield Event.create(event);
 
-    return response.redirect(`/rooms/${room.id}`);
+    return response.redirect(`/events/${event.id}`);
   }
 
   * show (request, response) {
     
-    const room = yield Room.findBy('id', request.param('id'));
+    const event = yield Event.findBy('id', request.param('id'));
 
-    if (room) {
-      room.desc = md.render(room.desc);
-      yield response.sendView('room', { room });
+    if (event) {
+      event.desc = md.render(event.desc);
+      yield response.sendView('event', { event });
     } else {
-      return response.json({ noRoom: true })
+      return response.json({ noEvent: true })
     }   
   }
 
@@ -49,25 +49,25 @@ class RoomController {
   }
 
   * destroy (request, response) {
-    const room = yield Room.findBy('id', request.param('id'));
-    yield room.delete();
-    response.redirect('/rooms')
+    const event = yield Event.findBy('id', request.param('id'));
+    yield event.delete();
+    response.redirect('/events')
   }
 
   * export (request, response) {
 
-    const roomId = request.param('id');
-    const guests = yield Guest.query().where('roomId', roomId).fetch();
+    const eventId = request.param('id');
+    const guests = yield Guest.query().where('eventId', eventId).fetch();
 
     let fields = ['name', 'date', 'class', 'email'];
     if (guests.value().length < 1) { 
-      return response.send('Sorry, no guests to export for that room.'); 
+      return response.send('Sorry, no guests to export for that event.'); 
     }
     let allGuests = guests.value().map( guest => guest.attributes)
 
     json2csv({ data: allGuests, fields: fields }, function (err, csv) {
       if (err) console.log(err);
-      response.header('Content-disposition', 'attachment; filename='+ `room-${roomId}-export.csv`);
+      response.header('Content-disposition', 'attachment; filename='+ `event-${eventId}-export.csv`);
       response.send(csv);
     })
 
@@ -75,4 +75,4 @@ class RoomController {
 
 }
 
-module.exports = RoomController
+module.exports = EventController

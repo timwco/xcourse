@@ -68561,28 +68561,48 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var courses = (0, _lodash2.default)(bsStats.rooms).map('class').uniq().value();
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var count = _lodash2.default.map(courses, function (course) {
-  return bsStats.guests.filter(function (guest) {
-    return guest.class === course;
-  }).length;
-});
+var Chart1 = function () {
+  function Chart1() {
+    _classCallCheck(this, Chart1);
 
-var data = {
-  labels: _lodash2.default.map(courses, function (course) {
-    return course.toUpperCase();
-  }),
-  datasets: [{ data: count }]
-};
+    this.courses = (0, _lodash2.default)(bsStats.events).map('class').uniq().value();
+    this.guests = bsStats.guests;
+  }
 
-exports.default = data;
+  _createClass(Chart1, [{
+    key: 'data',
+    value: function data() {
+      var _this = this;
+
+      var count = _lodash2.default.map(this.courses, function (course) {
+        return _this.guests.filter(function (guest) {
+          return guest.class === course;
+        }).length;
+      });
+
+      return {
+        labels: _lodash2.default.map(this.courses, function (course) {
+          return course.toUpperCase();
+        }),
+        datasets: [{ data: count }]
+      };
+    }
+  }]);
+
+  return Chart1;
+}();
+
+exports.default = Chart1;
 
 },{"lodash":49}],53:[function(require,module,exports){
 'use strict';
@@ -68591,41 +68611,64 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var guests = [];
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-bsStats.guests.forEach(function (guest) {
-  var specialGuest = _lodash2.default.find(guests, { email: guest.email });
-  if (specialGuest) {
-    specialGuest.count++;
-  } else {
-    guest.count = 1;
-    guests.push(guest);
+var Chart2 = function () {
+  function Chart2() {
+    _classCallCheck(this, Chart2);
+
+    this.guests = [];
+    this.originalGuests = bsStats.guests;
   }
-});
 
-guests = (0, _lodash2.default)(guests).orderBy('count').reverse().value();
+  _createClass(Chart2, [{
+    key: 'data',
+    value: function data() {
+      var _this = this;
 
-function topHTML(guests) {
-  var html = '';
-  guests.forEach(function (guest) {
-    var name = guest.name.replace(/\b[a-z]/g, function (fl) {
-      return fl.toUpperCase();
-    });
-    html += '<li><a href="/guest/' + guest.id + '">(' + guest.count + ') ' + name + '</a></li>';
-  });
-  return html;
-}
+      this.originalGuests.forEach(function (guest) {
+        var specialGuest = _lodash2.default.find(_this.guests, { email: guest.email });
+        if (specialGuest) {
+          specialGuest.count++;
+        } else {
+          guest.count = 1;
+          _this.guests.push(guest);
+        }
+      });
 
-exports.default = {
-  uniqueGuests: guests.length,
-  topGuests: topHTML(_lodash2.default.take(guests, 3))
-};
+      this.guests = (0, _lodash2.default)(this.guests).orderBy('count').reverse().value();
+
+      return {
+        uniqueGuests: this.guests.length,
+        topGuests: this.topHTML(_lodash2.default.take(this.guests, 3))
+      };
+    }
+  }, {
+    key: 'topHTML',
+    value: function topHTML(guests) {
+      var html = '';
+      guests.forEach(function (guest) {
+        var name = guest.name.replace(/\b[a-z]/g, function (fl) {
+          return fl.toUpperCase();
+        });
+        html += '<li><a href="/guest/' + guest.id + '">(' + guest.count + ') ' + name + '</a></li>';
+      });
+      return html;
+    }
+  }]);
+
+  return Chart2;
+}();
+
+exports.default = Chart2;
 
 },{"lodash":49}],54:[function(require,module,exports){
 'use strict';
@@ -68740,18 +68783,18 @@ var chartElem2b = document.getElementById('chart-2b');
 
 // Check for Charts Page
 var chartsCont = document.getElementById('stats-container');
-if (chartsCont) {
+if (chartsCont && bsStats) {
 
     // Guests Per Class
     new _chart2.default(chartElem1, {
         type: 'bar',
-        data: _chart4.default,
+        data: new _chart4.default().data(),
         options: { legend: { display: false } }
     });
 
     // Chart 2a, 2b
-    chartElem2a.innerHTML = _chart6.default.topGuests;
-    chartElem2b.innerHTML = _chart6.default.uniqueGuests;
+    chartElem2a.innerHTML = new _chart6.default().data().topGuests;
+    chartElem2b.innerHTML = new _chart6.default().data().uniqueGuests;
 }
 
 },{"./chart-data/chart1":52,"./chart-data/chart2":53,"chart.js":6}],56:[function(require,module,exports){

@@ -7,7 +7,7 @@
   <div class="tile is-ancestor">
     <div class="tile is-4 is-vertical is-parent">
       <div class="tile is-child box">
-        <p class="subtitle">Events: <strong>{{ rooms.length }}</strong></p>
+        <p class="subtitle">Events: <strong>{{ events.length }}</strong></p>
         <p class="subtitle">Guests: <strong>{{ guests.length }}</strong></p>
         <p class="subtitle">Unique Guests: <strong id="chart-2b"></strong></p>
       </div>
@@ -29,7 +29,7 @@
 </div>
 
 <script>
-var bsStats = { rooms: {{ rooms | json | safe }}, guests: {{ guests | json | safe }}};
+var bsStats = { events: {{ events | json | safe }}, guests: {{ guests | json | safe }}};
 </script>
 
 {% endblock %}

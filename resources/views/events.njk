@@ -1,0 +1,37 @@
+{% extends 'layout' %}
+
+{% block content %}
+
+<div class="adminContainer">
+
+  {% if empty %}
+    <div class="notification is-warning text-centered">
+      Sorry, there are no guests to export for that event.
+    </div>
+  {% endif %}
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Class</th>
+        <th>Date</th>
+        <th colspan="2">Tools</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for event in events %}
+        <tr>
+          <td>{{ event.class | classmap }}</td>
+          <td>{{ event.date }}</td>
+          <td><a href="/events/{{ event.id }}" class="button is-small is-link">View</a></td>
+          <td><a href="/events/export/{{ event.id }}" class="button is-small is-dark">Export</a></td>
+          {#<td><a href="/events/delete/{{ event.id }}" class="delete event-delete"></a></td>#}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+
+{% endblock %}
