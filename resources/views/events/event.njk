@@ -2,11 +2,16 @@
 
 {% block content %}
 
+<section class="hero is-primary">
+  <div class="hero-body">
+    <h1 class="title">{{ event.class | classmap }} Crash Course</h1>
+    <h2 class="subtitle"><i class="fa fa-calendar-o"></i>{{ event.date }}</h2>
+  </div>
+</section>
+
 <div class="columns">
   
   <div class="column course-description is-5">
-    <h2 class="title">{{ event.class | classmap }} Crash Course</h2>
-    <i class="tag is-primary">{{ event.date }}</i>
     <div class="text">{{ event.desc | safe }}</div>
   </div>
 

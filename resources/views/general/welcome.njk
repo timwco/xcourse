@@ -2,13 +2,14 @@
 
 {% block content %}
 
+<section class="hero is-primary">
+  <div class="hero-body">
+    <h1 class="title">Event Registration</h1>
+    <h2 class="subtitle">Please fill out the form below and choose the event you are attending.</h2>
+  </div>
+</section>
+
 <div class="form-container">
-
-  <h2 class="title">Event Registration</h2>
-
-  <p class="text-centered subtitle">
-    Please fill out the form below and choose the event you are attending.
-  </p>
 
   {% if events.length > 0 %}
   {{ form.open({action: 'GuestController.store' }) }}

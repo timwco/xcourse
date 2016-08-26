@@ -13,8 +13,11 @@
       <nav class="nav nav-left">
         <div class="nav-left pad-left">
           <a href="/" class="nav-item is-brand">
+            <span class="is-64x64 inflex">
+              <img src="/assets/tiy-logo.png" alt="The Iron Yard" />
+            </span>
             {% if me %}
-              <span class="tag is-danger">ADMIN - {{ me.name }}</span>
+              <span class="tag is-danger"><small>{{ me.name }}</small></span>
             {% endif %}
           </a>
         </div>
@@ -28,26 +31,15 @@
           </div>
         {% else %}
           <div class="nav-right pad-right">
-            <a href="/" class="nav-item"><i class="fa fa-home"></i></a>
             <a href="/auth/login" class="nav-item"><i class="fa fa-lock"></i></a>
           </div>
         {% endif %}
       </nav>
 
-      <header>
-        <img src="/assets/tiy-logo.png" alt="The Iron Yard" />
-      </header>
-
       <div class="container">
         {% block content %}{% endblock %}
       </div>
     </div>
-
-    <footer class="footer">
-      <div class="content has-text-centered">
-        <p>Brought to you by <a href="http://theironyard.com">The Iron Yard</a></p>
-      </div>
-    </footer>
 
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <script src="/bundle.js" charset="utf-8"></script>

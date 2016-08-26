@@ -55,10 +55,24 @@ header {
   }
 }
 
+.inflex {
+  display: inline-flex;
+}
+
 footer.footer {
   margin-top: 0;
   padding-top: 0;
 }
+
+.hero {
+  margin-bottom: 20px;
+  border-radius: 5px;
+  .hero-body {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
 
 .admin-view {
   position: absolute;

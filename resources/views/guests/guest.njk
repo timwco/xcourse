@@ -2,15 +2,15 @@
 
 {% block content %}
 
+<section class="hero is-primary">
+  <div class="hero-body">
+    <h1 class="title">{{ guest.name | capall }}</h1>
+  </div>
+</section>
+
 <div class="adminContainer">
 
   <div class="card is-fullwidth">
-    <header class="card-header">
-      <p class="card-header-title">{{ guest.name | capall }}</p>
-      <a class="card-header-icon">
-        <i class="fa fa-angle-down"></i>
-      </a>
-    </header>
     <div class="card-content">
       <div class="content">
         <article class="media">

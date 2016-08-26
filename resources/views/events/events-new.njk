@@ -2,32 +2,41 @@
 
 {% block content %}
 
-<h2 class="title">Create Event</h2>
-{{ form.open({action: 'EventController.store' }) }}
-  <label class="label">Crash Course Date</label>
-  <p class="control">
-    <input class="input" type="text" id="datepicker" name="date">
-  </p>
-  <p class="control">
-    <span class="select">
-      <select name="class">
-        <option value="">Which Class?</option>
-        <option value="js">JavaScript</option>
-        <option value="rb">Ruby</option>
-        <option value="de">Design</option>
-        <option value="ios">iOS</option>
-        <option value="java">Java</option>
-        <option value="net">.NET</option>
-      </select>
-    </span>
-  </p>
-  <label class="label">Details <small>(supports markdown)</small></label>
-  <p class="control">
-    <textarea class="textarea" name="description"></textarea>
-  </p>
-  <p class="control">
-    <button class="button is-primary">Create Event</button>
-  </p>
-{{ form.close() }}
+<section class="hero is-primary">
+  <div class="hero-body">
+    <h1 class="title">Create Event</h1>
+  </div>
+</section>
+
+<div class="form-container">
+
+  {{ form.open({action: 'EventController.store' }) }}
+    <label class="label">Crash Course Date</label>
+    <p class="control">
+      <input class="input" type="text" id="datepicker" name="date">
+    </p>
+    <p class="control">
+      <span class="select">
+        <select name="class">
+          <option value="">Which Class?</option>
+          <option value="js">JavaScript</option>
+          <option value="rb">Ruby</option>
+          <option value="de">Design</option>
+          <option value="ios">iOS</option>
+          <option value="java">Java</option>
+          <option value="net">.NET</option>
+        </select>
+      </span>
+    </p>
+    <label class="label">Details <small>(supports markdown)</small></label>
+    <p class="control">
+      <textarea class="textarea" name="description"></textarea>
+    </p>
+    <p class="control">
+      <button class="button is-primary">Create Event</button>
+    </p>
+  {{ form.close() }}
+
+</div>
 
 {% endblock %}
