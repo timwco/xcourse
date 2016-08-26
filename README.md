@@ -1,5 +1,3 @@
-# Docs Coming Soon :D
-
 ## TODO
 
 - [ ] Guest Auth
@@ -7,8 +5,8 @@
 - [ ] Remove AngularJS (Firebase)
 - [ ] Consistent semi-colons :(
 - [ ] Generic Events (no room needed)
-
-
+- [ ] Event/Guest Filters & Sorting
+- [ ] RWD Nav
 - [x] Review Login / (yay/boo)
 - [x] Fix Joining Room
 - [x] Remove FAKE Date in Welcome Method
